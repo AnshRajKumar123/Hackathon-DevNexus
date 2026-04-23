@@ -1,4 +1,4 @@
-/*-- MAIN NAVBAR --*/
+/* --- MAIN NAVBAR CONTAINER --- */
 nav {
     display: flex;
     align-items: center;
@@ -12,19 +12,183 @@ nav {
     left: 0;
     background-color: transparent;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 2555green, 255blue, 0.1alpha);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     mix-blend-mode: difference;
-    transition: transform 0.3s ease- ease-in-out;
-
+    transition: transform 0.3s ease-in-out;
 }
 
-/* DYNAMIC SCROLL CLASSES */
+/* --- DYNAMIC SCROLL CLASSES --- */
 .nav-visible {
     transform: translateY(0);
-    /* Normal position*/
+    /* Normal position */
 }
 
 .nav-hidden {
     transform: translateY(-100%);
-    /* slides the navbar up and out of view */
+    /* Slides the navbar up and out of view */
+}
+
+/* --- WEBSITE LOGO --- */
+.WebsiteLogo img {
+    height: 50px;
+    filter: saturate(0) brightness(5);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.WebsiteLogo:hover img {
+    filter: invert(41%) sepia(82%) saturate(2250%) hue-rotate(238deg) brightness(99%) contrast(93%);
+}
+
+/* --- RIGHT SIDE NAVIGATION LIST --- */
+.SecondSide ul {
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.SecondSide ul button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+/* --- NAVIGATION LINKS --- */
+.SameKamKeLiye {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    color: #ffffff;
+    font-size: 18px;
+    font-family: var(--Font3, sans-serif);
+    font-weight: 600;
+    transition: 0.25s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Underline Animation */
+.SameKamKeLiye::before {
+    position: absolute;
+    content: '';
+    bottom: -1px;
+    left: -3px;
+    height: 2px;
+    width: 0%;
+    background-color: #895CF5;
+    border-radius: 50px;
+    transition: 0.25s ease-in-out;
+}
+
+/* Hover & Active States for Underline */
+.SameKamKeLiye:hover::before,
+.SameKamKeLiye.active::before,
+.DropDownBox:hover .SameKamKeLiye::before {
+    width: 110%;
+}
+
+/* Hover & Active States for Text Color */
+.SameKamKeLiye:hover,
+.SameKamKeLiye.active,
+.DropDownBox:hover .SameKamKeLiye {
+    color: #895CF5;
+}
+
+.ForIcons i {
+    font-size: 12px;
+}
+
+/* --- DROPDOWN MENU --- */
+.DropDownBox {
+    position: relative;
+    display: inline-block;
+}
+
+.ForSpaceBox {
+    display: none;
+    position: absolute;
+    right: 0;
+    padding-top: 15px;
+    transition: 0.4s ease-in-out;
+}
+
+.DropListBox {
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    background-color: #5b19f4;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.DropListBox span,
+.DropListBox a {
+    padding: 10px 12px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--Font3, sans-serif);
+    font-size: 15px;
+}
+
+.DropListBox span:hover,
+.DropListBox a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.DropDownBox:hover .ForSpaceBox {
+    display: block;
+}
+
+/* --- CLERK AUTHENTICATION WRAPPER --- */
+.AuthWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: -1rem;
+}
+
+/* Custom Styled Login Button matching your theme */
+.ClerkLoginBtn {
+    background-color: #895CF5 !important;
+    color: white !important;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: var(--Font3, sans-serif);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(137, 92, 245, 0.3);
+}
+
+.ClerkLoginBtn:hover {
+    background-color: #7042e0 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(137, 92, 245, 0.4);
+}
+
+/* Sizing the Clerk User Avatar */
+.UserAvatarSize {
+    width: 45px !important;
+    height: 45px !important;
+    border: 2px solid #895CF5;
+    transition: 0.3s ease-in-out;
+    border-radius: 50%;
+}
+
+.UserAvatarSize:hover {
+    transform: scale(1.1);
 }
