@@ -5,6 +5,7 @@ import Footer from './ComponentJSX/Footer'
 import { Route, Routes } from 'react-router-dom'
 import BookCenter from './ComponentJSX/BookCenter'
 import BookedHistory from './ComponentJSX/BookedHistory'
+import About from './ComponentJSX/About'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/bookcenter' element={<BookCenter />} />
         <Route path='/bookedhistory' element={<BookedHistory />} />
+        <Route path='/about' element={<About />} />
       </Routes>
 
       <Footer />
