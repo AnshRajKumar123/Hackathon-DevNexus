@@ -1,0 +1,42 @@
+.FeatureSection {
+    margin: 6rem 0;
+    width: 100%;
+    height: 400px;
+}
+
+.FeatureForBorder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #fff;
+    border-radius: 12px;
+    padding: 4rem;
+    margin: 2rem 5rem;
+}
+
+.FeatThr {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.FeatThr .ImageBoxSet img {
+    /* filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%); */
+    height: 150px;
+    margin-bottom: 1rem;
+}
+
+.FeatThr h3 {
+    color: #fff;
+    font-family: var(--Font3);
+    font-size: 22px;
+    letter-spacing: -0.3px;
+}
+
+.FeatThr p {
+    width: 300px;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 5px;
+}
