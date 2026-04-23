@@ -526,3 +526,21 @@
 .BezMargin {
     margin-bottom: 1rem;
 }
+
+/* --- New Release Timer for Booked Slots --- */
+.ReleaseTimer {
+    position: absolute;
+    bottom: 2px;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    line-height: 1.1;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 2px 4px;
+    border-radius: 4px;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

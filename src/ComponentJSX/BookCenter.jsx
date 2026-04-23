@@ -5,7 +5,10 @@ import { ImageCenter } from '../assets/assest'
 
 const BookCenter = () => {
     const location = useLocation();
-    const { selectedAddress } = location.state || {};
+    
+    // Check router state first, if it's empty, fall back to Local Storage
+    const savedDestination = JSON.parse(localStorage.getItem('selectedParkingDestination')) || {};
+    const selectedAddress = location.state?.selectedAddress || savedDestination.selectedAddress;
 
     const [activeSection, setActiveSection] = useState("A1");
     const [selectedSlots, setSelectedSlots] = useState([]);
@@ -15,13 +18,18 @@ const BookCenter = () => {
         return savedBookings ? JSON.parse(savedBookings) : [];
     });
 
+    // NEW: We need the parking history in state so we can read the outTimes
+    const [parkingHistory, setParkingHistory] = useState(() => {
+        const savedHistory = localStorage.getItem('parkingHistory');
+        return savedHistory ? JSON.parse(savedHistory) : [];
+    });
+
     // --- Modal States ---
-    const [showModal, setShowModal] = useState(false);             // Step 1: Details
-    const [showPaymentModal, setShowPaymentModal] = useState(false); // Step 2: Payment
-    const [showTicketModal, setShowTicketModal] = useState(false);   // Step 3: Success
+    const [showModal, setShowModal] = useState(false);             
+    const [showPaymentModal, setShowPaymentModal] = useState(false); 
+    const [showTicketModal, setShowTicketModal] = useState(false);   
     const [currentTicket, setCurrentTicket] = useState(null);
 
-    // Initialize form with saved profile if it exists
     const [formData, setFormData] = useState(() => {
         const savedProfile = localStorage.getItem('userParkingProfile');
         const profile = savedProfile ? JSON.parse(savedProfile) : {};
@@ -38,7 +46,6 @@ const BookCenter = () => {
 
     const [formErrors, setFormErrors] = useState({});
 
-    // Prevent body scrolling when any modal is open
     useEffect(() => {
         if (showModal || showPaymentModal || showTicketModal) {
             document.body.style.overflow = 'hidden';
@@ -48,14 +55,12 @@ const BookCenter = () => {
         return () => { document.body.style.overflow = 'unset'; };
     }, [showModal, showPaymentModal, showTicketModal]);
 
-    // Calculate Min/Max Dates (Today to +7 days)
     const today = new Date();
     const minDate = today.toISOString().split('T')[0];
     const maxDateObj = new Date(today);
     maxDateObj.setDate(today.getDate() + 7);
     const maxDate = maxDateObj.toISOString().split('T')[0];
 
-    // Sections array with custom slot totals
     const sections = [
         { id: "A1", total: 60 }, { id: "A2", total: 50 }, { id: "A3", total: 65 },
         { id: "B1", total: 70 }, { id: "B2", total: 50 }, { id: "B3", total: 45 },
@@ -65,14 +70,11 @@ const BookCenter = () => {
     const currentSectionData = sections.find(sec => sec.id === activeSection);
     const totalSlotsForActiveSection = currentSectionData ? currentSectionData.total : 60;
 
-    // Generate dynamic slots
     const slots = Array.from({ length: totalSlotsForActiveSection }, (_, i) => {
         const slotNumber = i + 1;
         const formattedNumber = slotNumber < 10 ? `0${slotNumber}` : slotNumber;
-
         let category = "Basic";
         let price = 35;
-
         if (slotNumber <= Math.ceil(totalSlotsForActiveSection * 0.15)) {
             category = "Premium";
             price = 70;
@@ -80,7 +82,6 @@ const BookCenter = () => {
             category = "Standard";
             price = 50;
         }
-
         return {
             id: `${activeSection}-${formattedNumber}`,
             label: `${activeSection}-${formattedNumber}`,
@@ -89,10 +90,8 @@ const BookCenter = () => {
         };
     });
 
-    // Dynamic Column Generation
     const columns = [];
     const slotsPerColumn = Math.ceil(totalSlotsForActiveSection / 5);
-
     for (let i = 0; i < 5; i++) {
         columns.push(slots.slice(i * slotsPerColumn, (i + 1) * slotsPerColumn));
     }
@@ -143,7 +142,6 @@ const BookCenter = () => {
         return 'PRK-' + Math.random().toString(36).substr(2, 6).toUpperCase();
     };
 
-    // STEP 1: Proceed from Details to Payment
     const handleProceedToPayment = (e) => {
         e.preventDefault();
         if (validateForm()) {
@@ -152,14 +150,11 @@ const BookCenter = () => {
         }
     };
 
-    // STEP 2: Finalize Booking after Payment
     const handleFinalBooking = () => {
-        // 1. Save booked slots
         const newBookedSlots = [...bookedSlots, ...selectedSlots];
         setBookedSlots(newBookedSlots);
         localStorage.setItem('bookedParkingSlots', JSON.stringify(newBookedSlots));
 
-        // 2. Save User Profile for next time
         localStorage.setItem('userParkingProfile', JSON.stringify({
             name: formData.name,
             phone: formData.phone,
@@ -167,7 +162,6 @@ const BookCenter = () => {
             plateNumber: formData.plateNumber
         }));
 
-        // 3. Create Ticket Data
         const ticketData = {
             bookingId: generateBookingID(),
             name: formData.name,
@@ -180,21 +174,39 @@ const BookCenter = () => {
             timestamp: new Date().toISOString()
         };
 
-        // 4. Save to History
         const existingHistory = JSON.parse(localStorage.getItem('parkingHistory')) || [];
-        localStorage.setItem('parkingHistory', JSON.stringify([...existingHistory, ticketData]));
+        const updatedHistory = [...existingHistory, ticketData];
+        
+        localStorage.setItem('parkingHistory', JSON.stringify(updatedHistory));
+        setParkingHistory(updatedHistory); // NEW: Update history state so timers show immediately
 
-        // 5. Update UI state
         setCurrentTicket(ticketData);
         setShowPaymentModal(false);
         setShowTicketModal(true);
 
-        // 6. Reset form dates and slots
         setSelectedSlots([]);
         setFormData(prev => ({ ...prev, bookingDate: '', inTime: '', outTime: '' }));
     };
 
     const filledInActiveSection = bookedSlots.filter(id => id.startsWith(activeSection)).length;
+
+    // NEW: Map each booked slot to its specific Out Time and Date
+    const bookedSlotDetails = {};
+    parkingHistory.forEach(ticket => {
+        ticket.slots.forEach(slotId => {
+            bookedSlotDetails[slotId] = {
+                date: ticket.date,
+                outTime: ticket.outTime
+            };
+        });
+    });
+
+    // Helper to format the timer text (e.g. "04/05 14:30")
+    const formatReleaseTime = (dateStr, timeStr) => {
+        if (!dateStr || !timeStr) return "";
+        const [, month, day] = dateStr.split('-');
+        return `${month}/${day} ${timeStr}`;
+    };
 
     return (
         <div className='BookCenter_Section'>
@@ -226,16 +238,33 @@ const BookCenter = () => {
                                 {col.map((slot) => {
                                     const isBooked = bookedSlots.includes(slot.id);
                                     const isSelected = selectedSlots.includes(slot.id);
+                                    const releaseInfo = bookedSlotDetails[slot.id]; // Grab the release time for this slot
+
                                     return (
                                         <div
                                             key={slot.id}
                                             className={`ParkingSlot ${isBooked ? 'booked-slot' : ''} ${isSelected && !isBooked ? 'selected-slot' : ''}`}
                                             onClick={() => handleSlotClick(slot.id)}
                                         >
-                                            {isBooked && <span className="icon car-icon">🚗</span>}
-                                            <span className="SlotNum">{slot.label}</span>
-                                            <span className="SlotCategory">{slot.category}</span>
-                                            <span className="SlotPrice">₹{slot.price}</span>
+                                            {isBooked ? (
+                                                // NEW: Render this if the slot is booked
+                                                <>
+                                                    <span className="icon car-icon">🚗</span>
+                                                    <span className="SlotNum">{slot.label}</span>
+                                                    {releaseInfo && (
+                                                        <span className="ReleaseTimer">
+                                                            Free: {formatReleaseTime(releaseInfo.date, releaseInfo.outTime)}
+                                                        </span>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                // Render this if the slot is available
+                                                <>
+                                                    <span className="SlotNum">{slot.label}</span>
+                                                    <span className="SlotCategory">{slot.category}</span>
+                                                    <span className="SlotPrice">₹{slot.price}</span>
+                                                </>
+                                            )}
                                         </div>
                                     );
                                 })}
@@ -327,12 +356,12 @@ const BookCenter = () => {
                         </div>
 
                         <div className="ModalActions">
-                            <button
-                                type="button"
-                                className="CancelBtn"
+                            <button 
+                                type="button" 
+                                className="CancelBtn" 
                                 onClick={() => {
                                     setShowPaymentModal(false);
-                                    setShowModal(true); // Go back to details
+                                    setShowModal(true); 
                                 }}
                             >
                                 Back
@@ -367,7 +396,7 @@ const BookCenter = () => {
 
                             <div className="TicketDetails">
                                 <div className="DetailRow"><span>Name:</span> <strong>{currentTicket.name}</strong></div>
-                                <div className="DetailRow">x<span>Date:</span> <strong>{currentTicket.date}</strong></div>
+                                <div className="DetailRow"><span>Date:</span> <strong>{currentTicket.date}</strong></div>
                                 <div className="DetailRow"><span>Time:</span> <strong>{currentTicket.inTime} to {currentTicket.outTime}</strong></div>
                                 <div className="DetailRow"><span>Slots:</span> <strong>{currentTicket.slots.join(', ')}</strong></div>
                                 <div className="DetailRow"><span>Vehicle:</span> <strong>{currentTicket.plateNumber}</strong></div>
