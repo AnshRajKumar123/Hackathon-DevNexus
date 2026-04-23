@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap, Polyline 
 import { useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import '../ComponentCSS/HeroSect.css';
+import '../ComponentCSS/FrontPage.css';
 import { ImageCenter } from '../assets/assest';
 import Toast from './Toast';
 
