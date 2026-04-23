@@ -8,6 +8,7 @@ import BookedHistory from './ComponentJSX/BookedHistory'
 import About from './ComponentJSX/About'
 import HelpSupport from './ComponentJSX/HelpSupport'
 import ReportAFraud from './ComponentJSX/ReportAFraud'
+import AIAssistant from './ComponentJSX/AIAssistant'
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         <Route path='/reportfraud' element={<ReportAFraud />} />
         <Route path='/helpsupport' element={<HelpSupport />} />
       </Routes>
-
+      <AIAssistant />
       <Footer />
     </>
   )
