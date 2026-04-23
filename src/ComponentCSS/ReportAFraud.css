@@ -1,0 +1,402 @@
+.ReportSection {
+    width: 100%;
+    padding-bottom: 50px;
+    margin-top: 6.2rem;
+}
+
+.ReportSection .HelpSectBanner {
+    width: 100%;
+    height: 320px;
+    background-color: #E53935;
+    background-image: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ReportSection .HelpSectBanner h1 {
+    font-family: var(--Font3, sans-serif);
+    letter-spacing: -2px;
+    color: #fff;
+    font-size: 3.5rem;
+}
+
+.ReportSection .HelpFormSection {
+    display: flex;
+    gap: 4rem;
+    padding: 3rem 0;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ReportSection .HelpForm {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* --- Input Fields & Floating Labels (Red Theme) --- */
+.ReportSection .input-box {
+    position: relative;
+    width: 100%;
+}
+
+.ReportSection .input-accent {
+    position: absolute;
+    left: -2px;
+    top: 8px;
+    bottom: 8px;
+    width: 6px;
+    border-radius: 6px;
+    background: linear-gradient(to bottom, #ff7b7b, #E53935);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.ReportSection .input-box:focus-within .input-accent {
+    opacity: 1;
+}
+
+.ReportSection .input-field {
+    width: 100%;
+    height: 60px;
+    /* Standardized height */
+    padding: 24px 16px 8px 24px;
+    font-size: 15px;
+    color: #333;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.ReportSection .textarea-field {
+    height: 150px;
+    resize: none;
+}
+
+.ReportSection .input-field:focus {
+    border-color: #E53935;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2);
+}
+
+.ReportSection .input-label {
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    font-size: 15px;
+    color: #888;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.ReportSection .TextAreaBox .input-label {
+    top: 20px;
+}
+
+/* Floating Label Animation */
+.ReportSection .input-field:focus+.input-label,
+.ReportSection .input-field:not(:placeholder-shown)+.input-label {
+    top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #E53935;
+}
+
+.ReportSection .char-count {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* --- Fraud Reason Radio Buttons --- */
+.fraud-reason-section {
+    background: #fffafa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #E53935;
+    margin-top: 10px;
+}
+
+.fraud-reason-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-family: var(--Font3, sans-serif);
+    letter-spacing: -0.4px;
+    color: #333;
+}
+
+.fraud-reason-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.reasonLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 6px;
+}
+
+.reasonLabel:hover {
+    background: #ffebeb;
+}
+
+.reasonLabel span {
+    color: #555;
+    font-size: 15px;
+}
+
+.fraud-reason-options input[type="radio"] {
+    height: 18px;
+    width: 18px;
+    accent-color: #E53935;
+    /* Turns the radio button red when checked */
+    cursor: pointer;
+}
+
+/* --- Upload Box (Red Theme) --- */
+.ReportSection .upload-box {
+    border: 2px dashed #ddd;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 10px;
+    position: relative;
+}
+
+.ReportSection .upload-box:hover {
+    background: #fff5f5;
+    border-color: #E53935;
+}
+
+.ReportSection .upload-content input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.ReportSection .upload-icon {
+    font-size: 45px;
+    color: #E53935;
+    /* Updated from green to red */
+}
+
+.upload-content p {
+    font-size: 15px;
+    margin-top: 10px;
+    color: #777;
+}
+
+.ReportSection .upload-content p span {
+    color: #E53935;
+    /* Updated from green to red */
+    font-weight: 600;
+}
+
+.ReportSection .upload-preview img {
+    max-width: 100%;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.ReportSection .pdf-preview {
+    text-align: center;
+}
+
+.ReportSection .pdf-icon {
+    font-size: 50px;
+    color: #E53935;
+}
+
+.ReportSection .remove-file-btn {
+    margin-top: 12px;
+    background: #ff4747;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.ReportSection .remove-file-btn:hover {
+    background: #cc0000;
+}
+
+.ReportSection .SomeTermsOfCond {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.4;
+    margin-top: -5px;
+}
+
+/* --- Submit Button --- */
+.ReportSection button.SubmitButton {
+    border: none;
+    padding: 15px;
+    background-color: #E53935;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-family: var(--Font3, sans-serif);
+    font-weight: 600;
+    border-radius: 8px;
+    transition: 0.2s ease-in-out;
+    margin-top: 10px;
+}
+
+.ReportSection button.SubmitButton:hover:not(:disabled) {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(229, 57, 53, 0.3);
+}
+
+.ReportSection button.SubmitButton:disabled {
+    background-color: #ff9999;
+    cursor: not-allowed;
+}
+
+/* --- Right Side Boxes --- */
+.ReportSection .infoReportBoxes {
+    width: 35%;
+}
+
+.ReportSection .SafetyEmergency {
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+.ReportSection .SafetyEmergency h1 {
+    font-size: 1.4rem;
+    font-family: var(--Font3, sans-serif);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: #E53935;
+    /* Red title for disclaimer */
+}
+
+.ReportSection .SafetyEmergency p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.ReportSection .SafetyEmergency a {
+    color: var(--primary-color, #895CF5);
+    /* Link back to normal help uses your main theme color */
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* --- SUCCESS POP-UP MODAL --- */
+.SuccessModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    /* Stays above the navbar */
+}
+
+.SuccessModalContent {
+    background: #fff;
+    width: 90%;
+    max-width: 420px;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.SuccessEmoji {
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    animation: bounce 1s ease infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.SuccessModalContent h2 {
+    font-family: var(--Font3, sans-serif);
+    font-size: 1.8rem;
+    color: #111;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.5px;
+}
+
+.SuccessModalContent p {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+}
+
+.CloseSuccessBtn {
+    background-color: #E53935;
+    /* Matches your red theme */
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: var(--Font3, sans-serif);
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+}
+
+.CloseSuccessBtn:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+}

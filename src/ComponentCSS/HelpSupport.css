@@ -1,0 +1,442 @@
+:root {
+    --primary-color: #895CF5;
+    --primary-light: #a985f8;
+}
+
+.HelpSectBanner {
+    width: 100%;
+    height: 400px;
+    background-image: url(/public/HelpSupport_Image.jpg);
+    background-color: #5b19f4;
+    background-position: center;
+    background-size: cover;
+    margin-top: 6.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.HelpSectBanner h1 {
+    font-size: 4.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    font-family: var(--Font2, sans-serif);
+    letter-spacing: 2px;
+}
+
+.HelpFormSection {
+    display: flex;
+    gap: 4rem;
+    padding: 3rem 0;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.HelpForm {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.DropContainer {
+    width: 100%;
+    position: relative;
+    font-family: sans-serif;
+    z-index: 10;
+}
+
+/* Header */
+.DropHeader {
+    padding: 18px 24px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.inputAcc {
+    position: absolute;
+    left: -2px;
+    top: 8px;
+    bottom: 8px;
+    width: 6px;
+    border-radius: 6px;
+    background: linear-gradient(to bottom, var(--primary-light), var(--primary-color));
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.SelectHelp {
+    font-size: 16px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.Arrow {
+    font-size: 14px;
+    color: #777;
+    transition: 0.3s ease-in-out;
+}
+
+.Rotate {
+    transform: rotate(180deg);
+}
+
+/* Dropdown list */
+.DropList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    background: #fff;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.DropItem {
+    padding: 16px 24px;
+    font-size: 15px;
+    color: #555;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.DropItem:hover {
+    background: #f8f5ff;
+    color: var(--primary-color);
+}
+
+/* Wrapper */
+.input-box {
+    position: relative;
+    width: 100%;
+}
+
+/* Left gradient bar */
+.input-accent {
+    position: absolute;
+    left: -2px;
+    top: 8px;
+    bottom: 8px;
+    width: 6px;
+    border-radius: 6px;
+    background: linear-gradient(to bottom, var(--primary-light), var(--primary-color));
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.input-box:focus-within .input-accent {
+    opacity: 1;
+}
+
+/* Base Input styling */
+.input-field {
+    width: 100%;
+    height: 60px;
+    /* Fixed normal height */
+    padding: 24px 16px 8px 24px;
+    font-size: 15px;
+    color: #333;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+/* Textarea specific height */
+.textarea-field {
+    height: 150px;
+    resize: none;
+}
+
+.input-field:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(137, 92, 245, 0.2);
+}
+
+/* Floating Label Logic */
+.input-label {
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    font-size: 15px;
+    color: #888;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.TextAreaBox .input-label {
+    top: 20px;
+}
+
+/* Label moves up when input is focused or HAS text */
+.input-field:focus+.input-label,
+.input-field:not(:placeholder-shown)+.input-label {
+    top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.char-count {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Upload Box */
+.upload-box {
+    width: 100%;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    background: #fafafa;
+    transition: border-color 0.3s;
+}
+
+.upload-box:hover {
+    border-color: var(--primary-color);
+}
+
+.upload-content input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 45px;
+    color: #7244d4;
+    /* Updated from green to red */
+}
+
+.upload-content span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.upload-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-preview img {
+    max-height: 100px;
+    border-radius: 6px;
+}
+
+.remove-file-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Submit Button */
+.SubmitButton {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    font-family: var(--Font3, sans-serif);
+    font-size: 1.2rem;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+.SubmitButton:hover {
+    background-color: #7244d4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(137, 92, 245, 0.3);
+}
+
+/* Right Side Boxes */
+.infoReportBoxes {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.SafetyEmergency {
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+.SafetyEmergency h1 {
+    font-size: 1.4rem;
+    font-family: var(--Font3, sans-serif);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.SafetyEmergency p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.SafetyEmergency a {
+    color: #ff4d4d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.FAQBox {
+    background: #f8f5ff;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.FAQBox h3 {
+    font-family: var(--Font3, sans-serif);
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.FAQBox ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.FAQBox ul .faqListItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+    font-size: 15px;
+}
+
+
+/* --- SUCCESS POP-UP MODAL (Purple Theme) --- */
+.SuccessModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.SuccessModalContent {
+    background: #fff;
+    width: 90%;
+    max-width: 420px;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.SuccessEmoji {
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    animation: bounce 1s ease infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+.SuccessModalContent h2 {
+    font-family: var(--Font3, sans-serif);
+    font-size: 1.8rem;
+    color: #111;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.5px;
+}
+
+.SuccessModalContent p {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+}
+
+.SuccessModalContent p strong {
+    color: #895CF5;
+    /* Purple highlight for the email address */
+}
+
+/* Purple Button Theme */
+.CloseSuccessBtn {
+    background-color: #895CF5;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: var(--Font3, sans-serif);
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 4px 15px rgba(137, 92, 245, 0.3);
+}
+
+.CloseSuccessBtn:hover {
+    background-color: #7244d4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(137, 92, 245, 0.4);
+}
