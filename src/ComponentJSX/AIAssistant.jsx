@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import '../ComponentCSS/AIAssistant.css';
 
 // 🚨 PASTE YOUR GEMINI API KEY HERE 🚨
-const API_KEY = "import.meta.env.VITE_GEMINI_API_KEY"; 
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const AIAssistant = () => {
@@ -35,7 +35,7 @@ const AIAssistant = () => {
 
         try {
             const historyData = localStorage.getItem('parkingHistory') || "No past bookings yet.";
-            
+
             // --- THE NEW MAGIC PROMPT ---
             // This forces the AI to use its real-world geographical knowledge!
             const systemPrompt = `
@@ -53,14 +53,20 @@ const AIAssistant = () => {
             `;
 
             // 👇 CHANGED TO gemini-pro TO FIX YOUR 404 CRASH 👇
-            const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
             const result = await model.generateContent(systemPrompt);
             const botResponse = await result.response.text(); // Added 'await' just to be safe
 
             setMessages(prev => [...prev, { text: botResponse, isBot: true }]);
         } catch (error) {
             console.error("AI Error:", error);
-            setMessages(prev => [...prev, { text: "Oops! My AI brain is having a hiccup. Check your API key and try again!", isBot: true }]);
+
+            // Pro-level error handling: Detect if the server is just busy
+            if (error.message && (error.message.includes("503") || error.message.includes("high demand"))) {
+                setMessages(prev => [...prev, { text: "Wow, a lot of people are asking me for parking advice right now! 🚦 Give me 5 seconds and try asking again.", isBot: true }]);
+            } else {
+                setMessages(prev => [...prev, { text: "Oops! My AI brain is having a hiccup. Check your connection and try again!", isBot: true }]);
+            }
         } finally {
             setIsLoading(false);
         }
@@ -98,9 +104,9 @@ const AIAssistant = () => {
                     </div>
 
                     <form className="AIChatInputArea" onSubmit={handleSend}>
-                        <input 
-                            type="text" 
-                            placeholder="Ask about a location..." 
+                        <input
+                            type="text"
+                            placeholder="Ask about a location..."
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             disabled={isLoading}
