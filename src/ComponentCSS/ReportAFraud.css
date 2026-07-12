@@ -1,402 +1,388 @@
-.ReportSection {
+/* ==========================================================================
+   🌟 PARKLY ENTERPRISE SECURITY & COMPLIANCE OPERATIONS SUITE
+   ========================================================================== */
+
+.ProFraudLayoutContainer {
     width: 100%;
-    padding-bottom: 50px;
-    margin-top: 6.2rem;
+    max-width: 1300px;
+    margin: 120px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
-.ReportSection .HelpSectBanner {
+.ProFraudHeaderDeck h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.ProTaglineText.AlertColor {
+    color: #ff4d4d;
+}
+
+/* --- ARCHITECTURAL CORE GRID CHANNELS --- */
+.ProFraudGridCore {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
     width: 100%;
-    height: 320px;
-    background-color: #E53935;
-    background-image: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
 }
 
-.ReportSection .HelpSectBanner h1 {
-    font-family: var(--Font3, sans-serif);
-    letter-spacing: -2px;
-    color: #fff;
-    font-size: 3.5rem;
-}
-
-.ReportSection .HelpFormSection {
-    display: flex;
-    gap: 4rem;
-    padding: 3rem 0;
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.ReportSection .HelpForm {
-    width: 60%;
+.ProFraudTerminalForm {
+    background-color: #0F1422;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-/* --- Input Fields & Floating Labels (Red Theme) --- */
-.ReportSection .input-box {
+/* --- DYNAMIC PANE DATA FIELDS --- */
+.ProFraudInputGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.ProFraudFieldBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
     position: relative;
-    width: 100%;
 }
 
-.ReportSection .input-accent {
-    position: absolute;
-    left: -2px;
-    top: 8px;
-    bottom: 8px;
-    width: 6px;
-    border-radius: 6px;
-    background: linear-gradient(to bottom, #ff7b7b, #E53935);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-    z-index: 1;
+.ProFraudFieldBlock label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.35);
 }
 
-.ReportSection .input-box:focus-within .input-accent {
-    opacity: 1;
-}
-
-.ReportSection .input-field {
-    width: 100%;
-    height: 60px;
-    /* Standardized height */
-    padding: 24px 16px 8px 24px;
-    font-size: 15px;
-    color: #333;
-    background: white;
-    border: 1px solid #ddd;
+.ProFraudFieldBlock input,
+.ProFraudFieldBlock textarea {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 8px;
-    transition: all 0.3s ease;
-    font-family: inherit;
+    padding: 12px 14px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-.ReportSection .textarea-field {
-    height: 150px;
+.ProFraudFieldBlock input:focus,
+.ProFraudFieldBlock textarea:focus {
+    border-color: #ff4d4d;
+}
+
+.TextareaFieldBlock textarea {
+    height: 140px;
     resize: none;
 }
 
-.ReportSection .input-field:focus {
-    border-color: #E53935;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2);
-}
-
-.ReportSection .input-label {
-    position: absolute;
-    left: 24px;
-    top: 20px;
-    font-size: 15px;
-    color: #888;
-    pointer-events: none;
-    transition: all 0.2s ease;
-}
-
-.ReportSection .TextAreaBox .input-label {
-    top: 20px;
-}
-
-/* Floating Label Animation */
-.ReportSection .input-field:focus+.input-label,
-.ReportSection .input-field:not(:placeholder-shown)+.input-label {
-    top: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #E53935;
-}
-
-.ReportSection .char-count {
+.ProCharCounterText {
     position: absolute;
     bottom: 10px;
-    right: 15px;
-    font-size: 12px;
-    color: #999;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.2);
 }
 
-/* --- Fraud Reason Radio Buttons --- */
-.fraud-reason-section {
-    background: #fffafa;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #E53935;
-    margin-top: 10px;
-}
-
-.fraud-reason-section h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    font-family: var(--Font3, sans-serif);
-    letter-spacing: -0.4px;
-    color: #333;
-}
-
-.fraud-reason-options {
+/* --- CUSTOM HIGH-END RADIO SELECTION LABELS --- */
+.ProFraudRadioSection {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
+    margin-top: 5px;
 }
 
-.reasonLabel {
+.ProFraudRadioSection h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.ProFraudRadioOptionsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.ProRadioLabelSlot {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 8px 12px;
+    padding: 14px;
     cursor: pointer;
-    transition: background 0.2s;
-    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
-.reasonLabel:hover {
-    background: #ffebeb;
+.ProRadioLabelSlot:hover {
+    background-color: rgba(255, 77, 77, 0.02);
+    border-color: rgba(255, 77, 77, 0.15);
 }
 
-.reasonLabel span {
-    color: #555;
-    font-size: 15px;
-}
-
-.fraud-reason-options input[type="radio"] {
-    height: 18px;
-    width: 18px;
-    accent-color: #E53935;
-    /* Turns the radio button red when checked */
+.ProRadioLabelSlot input[type="radio"] {
+    accent-color: #ff4d4d;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
 }
 
-/* --- Upload Box (Red Theme) --- */
-.ReportSection .upload-box {
-    border: 2px dashed #ddd;
-    background: #fafafa;
-    border-radius: 12px;
-    padding: 30px;
+.ProRadioLabelSlot span {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.radio-slot-active {
+    border-color: rgba(255, 77, 77, 0.3);
+    background-color: rgba(255, 77, 77, 0.04);
+}
+
+.radio-slot-active span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* --- DIGITAL FORENSICS UPLOAD PLATES --- */
+.ProUploadTerminalZone {
+    width: 100%;
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 24px;
+    box-sizing: border-box;
     text-align: center;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    margin-top: 10px;
     position: relative;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: border-color 0.25s ease;
 }
 
-.ReportSection .upload-box:hover {
-    background: #fff5f5;
-    border-color: #E53935;
+.ProUploadTerminalZone:hover {
+    border-color: #ff4d4d;
 }
 
-.ReportSection .upload-content input {
+.ZoneUploadPromptContent input {
     position: absolute;
+    inset: 0;
     opacity: 0;
     cursor: pointer;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
 }
 
-.ReportSection .upload-icon {
-    font-size: 45px;
-    color: #E53935;
-    /* Updated from green to red */
+.ZoneUploadPromptIcon.ThreatColor {
+    font-size: 36px;
+    color: #ff4d4d;
+    margin-bottom: 8px;
 }
 
-.upload-content p {
-    font-size: 15px;
-    margin-top: 10px;
-    color: #777;
+.ZoneUploadPromptContent p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    margin: 0;
 }
 
-.ReportSection .upload-content p span {
-    color: #E53935;
-    /* Updated from green to red */
-    font-weight: 600;
+.BrowseActionHighlight.ThreatLink {
+    color: #ff4d4d;
+    font-weight: 700;
+    text-decoration: underline;
 }
 
-.ReportSection .upload-preview img {
-    max-width: 100%;
-    height: 160px;
-    object-fit: contain;
-    border-radius: 10px;
+.ZoneUploadPreviewState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
-.ReportSection .pdf-preview {
+.ZoneUploadPreviewState img {
+    max-height: 120px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ProPdfPreviewBox {
     text-align: center;
 }
 
-.ReportSection .pdf-icon {
-    font-size: 50px;
-    color: #E53935;
+.ForensicPdfIcon {
+    font-size: 44px;
+    color: #ff4d4d;
+    margin-bottom: 4px;
 }
 
-.ReportSection .remove-file-btn {
-    margin-top: 12px;
-    background: #ff4747;
-    color: white;
-    border: none;
-    padding: 8px 16px;
+.ProPdfPreviewBox p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.ZoneRemoveImageCTA {
+    background-color: rgba(255, 77, 77, 0.08);
+    border: 1px solid rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
+    padding: 6px 14px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-.ReportSection .remove-file-btn:hover {
-    background: #cc0000;
-}
-
-.ReportSection .SomeTermsOfCond {
     font-size: 12px;
-    color: #888;
-    line-height: 1.4;
-    margin-top: -5px;
+    font-weight: 700;
+    transition: background 0.2s ease;
 }
 
-/* --- Submit Button --- */
-.ReportSection button.SubmitButton {
-    border: none;
-    padding: 15px;
-    background-color: #E53935;
-    color: #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    font-family: var(--Font3, sans-serif);
-    font-weight: 600;
-    border-radius: 8px;
-    transition: 0.2s ease-in-out;
-    margin-top: 10px;
+.ZoneRemoveImageCTA:hover {
+    background-color: rgba(255, 77, 77, 0.15);
 }
 
-.ReportSection button.SubmitButton:hover:not(:disabled) {
-    background-color: #cc0000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(229, 57, 53, 0.3);
-}
-
-.ReportSection button.SubmitButton:disabled {
-    background-color: #ff9999;
-    cursor: not-allowed;
-}
-
-/* --- Right Side Boxes --- */
-.ReportSection .infoReportBoxes {
-    width: 35%;
-}
-
-.ReportSection .SafetyEmergency {
-    padding: 25px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eee;
-}
-
-.ReportSection .SafetyEmergency h1 {
-    font-size: 1.4rem;
-    font-family: var(--Font3, sans-serif);
-    margin-bottom: 0.8rem;
-    font-weight: 600;
-    color: #E53935;
-    /* Red title for disclaimer */
-}
-
-.ReportSection .SafetyEmergency p {
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.ReportSection .SafetyEmergency a {
-    color: var(--primary-color, #895CF5);
-    /* Link back to normal help uses your main theme color */
-    font-weight: 600;
-    text-decoration: none;
-}
-
-/* --- SUCCESS POP-UP MODAL --- */
-.SuccessModalOverlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    /* Stays above the navbar */
-}
-
-.SuccessModalContent {
-    background: #fff;
-    width: 90%;
-    max-width: 420px;
-    padding: 2.5rem 2rem;
-    border-radius: 24px;
-    text-align: center;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-@keyframes popIn {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.SuccessEmoji {
-    font-size: 4.5rem;
-    margin-bottom: 0.5rem;
-    animation: bounce 1s ease infinite alternate;
-}
-
-@keyframes bounce {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-10px);
-    }
-}
-
-.SuccessModalContent h2 {
-    font-family: var(--Font3, sans-serif);
-    font-size: 1.8rem;
-    color: #111;
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.5px;
-}
-
-.SuccessModalContent p {
-    color: #555;
-    font-size: 1.05rem;
+/* --- FORM TEXT ACTIONS --- */
+.ProFormWarningDisclaimerText {
+    font-size: 12.5px;
     line-height: 1.5;
+    color: rgba(255, 77, 77, 0.6);
+    font-weight: 500;
+    display: flex;
+    gap: 6px;
+    margin: 0;
+}
+
+.ProFormWarningDisclaimerText i {
+    font-size: 16px;
+    margin-top: 1px;
+}
+
+.ProFraudSubmitCTA {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProFraudSubmitCTA:hover:not(:disabled) {
+    background-color: #ffffff;
+    color: var(--bg-midnight);
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+.ProFraudSubmitCTA:disabled {
+    background-color: rgba(255, 77, 77, 0.2);
+    color: rgba(255, 255, 255, 0.2);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* --- SIDE AUXILIARY STATIONS --- */
+.ProFraudAsideConsole {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.AsideSystemBentoCard.GenericHelpInfoCard {
+    padding: 2.2rem 2rem;
+    background-color: #0F1422;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.AsideSystemBentoCard.GenericHelpInfoCard h3 {
+    font-size: 18px;
+    font-family: var(--Font3), sans-serif;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.AsideSystemBentoCard.GenericHelpInfoCard p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
     margin-bottom: 1.8rem;
 }
 
-.CloseSuccessBtn {
-    background-color: #E53935;
-    /* Matches your red theme */
-    color: #fff;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    font-family: var(--Font3, sans-serif);
-    cursor: pointer;
-    transition: 0.2s ease;
-    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+.StandardSupportVectorLink {
+    color: var(--accent-cyan);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.2s ease;
 }
 
-.CloseSuccessBtn:hover {
-    background-color: #cc0000;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+.StandardSupportVectorLink:hover {
+    transform: translateX(3px);
+}
+
+/* --- CYBER OVERLAY SYSTEM VARIANT PANELS --- */
+.CustomAlertBorder {
+    border-color: rgba(255, 77, 77, 0.2) !important;
+}
+
+.ShieldThreatColor {
+    font-size: 64px;
+    color: #ff4d4d;
+    margin-bottom: 6px;
+}
+
+.AlertBgBtn {
+    background-color: #ff4d4d !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    margin-top: 10px;
+}
+
+.AlertBgBtn:hover {
+    background-color: #ffffff !important;
+    color: var(--bg-midnight) !important;
+}
+
+/* --- RESPONSIVE DECK COMPRESSIONS --- */
+@media (max-width: 1024px) {
+    .ProFraudLayoutContainer {
+        padding: 0 2rem;
+    }
+
+    .ProFraudGridCore {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .ProFraudInputGrid,
+    .ProFraudRadioOptionsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .ProFraudTerminalForm {
+        padding: 1.5rem;
+    }
 }

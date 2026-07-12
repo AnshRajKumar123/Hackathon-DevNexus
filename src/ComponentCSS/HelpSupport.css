@@ -1,337 +1,155 @@
-:root {
-    --primary-color: #895CF5;
-    --primary-light: #a985f8;
-}
+/* ==========================================================================
+   🌟 PARKLY CYBER COMPLIANCE & CUSTOMER COMMUNICATIONS STATION
+   ========================================================================== */
 
-.HelpSectBanner {
+.ProHelpLayoutContainer {
     width: 100%;
-    height: 400px;
-    background-image: url(/public/HelpSupport_Image.jpg);
-    background-color: #5b19f4;
-    background-position: center;
-    background-size: cover;
-    margin-top: 6.2rem;
+    max-width: 1300px;
+    margin: 120px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
-.HelpSectBanner h1 {
-    font-size: 4.5rem;
-    color: #fff;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    font-family: var(--Font2, sans-serif);
-    letter-spacing: 2px;
+.ProHelpHeaderDeck h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
 }
 
-.HelpFormSection {
-    display: flex;
-    gap: 4rem;
-    padding: 3rem 0;
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
+/* --- MAIN DASHBOARD DISTRIBUTION MATRIX --- */
+.ProHelpGridCore {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    width: 100%;
+    align-items: start;
 }
 
-.HelpForm {
-    width: 60%;
+.ProHelpTerminalForm {
+    background-color: #0F1422;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.DropContainer {
+/* --- SELECT DROPDOWN RECONSTRUCTION DECK --- */
+.ProHelpDropContainer {
     width: 100%;
     position: relative;
-    font-family: sans-serif;
-    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 20;
 }
 
-/* Header */
-.DropHeader {
-    padding: 18px 24px;
+.TerminalLabelField {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.ProHelpDropHeader {
+    padding: 14px 16px;
     width: 100%;
-    border: 1px solid #ddd;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 8px;
-    background: #fff;
+    background-color: rgba(255, 255, 255, 0.01);
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    position: relative;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    transition: border-color 0.25s ease;
 }
 
-.inputAcc {
-    position: absolute;
-    left: -2px;
-    top: 8px;
-    bottom: 8px;
-    width: 6px;
-    border-radius: 6px;
-    background: linear-gradient(to bottom, var(--primary-light), var(--primary-color));
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+.ProHelpDropHeader:hover {
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
-.SelectHelp {
-    font-size: 16px;
-    color: var(--primary-color);
-    font-weight: 600;
+.DropChevronIcon {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s ease;
 }
 
-.Arrow {
-    font-size: 14px;
-    color: #777;
-    transition: 0.3s ease-in-out;
-}
-
-.Rotate {
+.RotateIcon {
     transform: rotate(180deg);
+    color: var(--accent-cyan);
 }
 
-/* Dropdown list */
-.DropList {
+.DimText {
+    color: rgba(240, 253, 253, 0.4);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.HighlightText {
+    color: var(--accent-cyan);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.ProHelpDropList {
     position: absolute;
     top: 100%;
     left: 0;
-    margin-top: 8px;
-    background: #fff;
+    margin-top: 6px;
+    background-color: #151D30;
+    border: 1px solid rgba(255, 255, 255, 0.06);
     width: 100%;
     list-style: none;
-    padding: 0;
+    padding: 6px;
+    box-sizing: border-box;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 }
 
-.DropItem {
-    padding: 16px 24px;
-    font-size: 15px;
-    color: #555;
+.ProHelpDropItem {
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--text-secondary);
     cursor: pointer;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.DropItem:hover {
-    background: #f8f5ff;
-    color: var(--primary-color);
-}
-
-/* Wrapper */
-.input-box {
-    position: relative;
-    width: 100%;
-}
-
-/* Left gradient bar */
-.input-accent {
-    position: absolute;
-    left: -2px;
-    top: 8px;
-    bottom: 8px;
-    width: 6px;
     border-radius: 6px;
-    background: linear-gradient(to bottom, var(--primary-light), var(--primary-color));
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.input-box:focus-within .input-accent {
-    opacity: 1;
-}
-
-/* Base Input styling */
-.input-field {
-    width: 100%;
-    height: 60px;
-    /* Fixed normal height */
-    padding: 24px 16px 8px 24px;
-    font-size: 15px;
-    color: #333;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    font-family: inherit;
-}
-
-/* Textarea specific height */
-.textarea-field {
-    height: 150px;
-    resize: none;
-}
-
-.input-field:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(137, 92, 245, 0.2);
-}
-
-/* Floating Label Logic */
-.input-label {
-    position: absolute;
-    left: 24px;
-    top: 20px;
-    font-size: 15px;
-    color: #888;
-    pointer-events: none;
     transition: all 0.2s ease;
 }
 
-.TextAreaBox .input-label {
-    top: 20px;
+.ProHelpDropItem:hover {
+    background-color: rgba(0, 242, 254, 0.06);
+    color: var(--accent-cyan);
 }
 
-/* Label moves up when input is focused or HAS text */
-.input-field:focus+.input-label,
-.input-field:not(:placeholder-shown)+.input-label {
-    top: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--primary-color);
+/* --- DYNAMIC QUERY INLINE SHOWCASES --- */
+.ProFAQBentoBox {
+    background: rgba(0, 242, 254, 0.02);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 242, 254, 0.12);
 }
 
-.char-count {
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    font-size: 12px;
-    color: #999;
-}
-
-/* Upload Box */
-.upload-box {
-    width: 100%;
-    border: 2px dashed #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    background: #fafafa;
-    transition: border-color 0.3s;
-}
-
-.upload-box:hover {
-    border-color: var(--primary-color);
-}
-
-.upload-content input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.upload-icon {
-    font-size: 45px;
-    color: #7244d4;
-    /* Updated from green to red */
-}
-
-.upload-content span {
-    color: var(--primary-color);
-    font-weight: 600;
-}
-
-.upload-preview {
+.ProFAQBentoBox h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
-.upload-preview img {
-    max-height: 100px;
-    border-radius: 6px;
-}
-
-.remove-file-btn {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* Submit Button */
-.SubmitButton {
-    background-color: var(--primary-color);
-    color: #fff;
-    font-weight: 600;
-    font-family: var(--Font3, sans-serif);
-    font-size: 1.2rem;
-    padding: 15px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease;
-    margin-top: 10px;
-}
-
-.SubmitButton:hover {
-    background-color: #7244d4;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(137, 92, 245, 0.3);
-}
-
-/* Right Side Boxes */
-.infoReportBoxes {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.SafetyEmergency {
-    padding: 25px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eee;
-}
-
-.SafetyEmergency h1 {
-    font-size: 1.4rem;
-    font-family: var(--Font3, sans-serif);
-    margin-bottom: 0.8rem;
-    font-weight: 600;
-    color: var(--primary-color);
-}
-
-.SafetyEmergency p {
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.SafetyEmergency a {
-    color: #ff4d4d;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.FAQBox {
-    background: #f8f5ff;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
-}
-
-.FAQBox h3 {
-    font-family: var(--Font3, sans-serif);
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.FAQBox ul {
+.ProFAQBentoBox ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -340,103 +158,252 @@
     gap: 10px;
 }
 
-.FAQBox ul .faqListItem {
+.ProFaqListItem {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: #555;
-    font-size: 15px;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 13.5px;
 }
 
+.ProFaqListItem i {
+    color: var(--accent-cyan);
+    font-size: 16px;
+}
 
-/* --- SUCCESS POP-UP MODAL (Purple Theme) --- */
-.SuccessModalOverlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(8px);
+/* --- FORM DATA ENTRY SLOTS --- */
+.ProHelpInputGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.ProHelpFieldBlock {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    position: relative;
 }
 
-.SuccessModalContent {
-    background: #fff;
-    width: 90%;
-    max-width: 420px;
-    padding: 2.5rem 2rem;
-    border-radius: 24px;
+.ProHelpFieldBlock label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.ProHelpFieldBlock input,
+.ProHelpFieldBlock textarea {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.ProHelpFieldBlock input:focus,
+.ProHelpFieldBlock textarea:focus {
+    border-color: var(--accent-cyan);
+}
+
+.TextareaFieldBlock textarea {
+    height: 130px;
+    resize: none;
+}
+
+.ProCharCounterText {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- FILE SCREENSHOT INTERACTION CONSOLES --- */
+.ProUploadTerminalZone {
+    width: 100%;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 24px;
+    box-sizing: border-box;
     text-align: center;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: border-color 0.25s ease;
 }
 
-@keyframes popIn {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.ProUploadTerminalZone:hover {
+    border-color: var(--accent-cyan);
 }
 
-.SuccessEmoji {
-    font-size: 4.5rem;
-    margin-bottom: 0.5rem;
-    animation: bounce 1s ease infinite alternate;
+.ZoneUploadPromptContent input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
 }
 
-@keyframes bounce {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-10px);
-    }
+.ZoneUploadPromptIcon {
+    font-size: 36px;
+    color: var(--accent-cyan);
+    margin-bottom: 8px;
 }
 
-.SuccessModalContent h2 {
-    font-family: var(--Font3, sans-serif);
-    font-size: 1.8rem;
-    color: #111;
+.ZoneUploadPromptContent p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.BrowseActionHighlight {
+    color: var(--accent-cyan);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.ZoneUploadPreviewState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.ZoneUploadPreviewState img {
+    max-height: 110px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ZoneRemoveImageCTA {
+    background-color: rgba(255, 77, 77, 0.08);
+    border: 1px solid rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+.ZoneRemoveImageCTA:hover {
+    background-color: rgba(255, 77, 77, 0.15);
+}
+
+.ProHelpSubmitCTA {
+    background-color: var(--accent-cyan);
+    color: var(--bg-midnight);
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProHelpSubmitCTA:hover {
+    background-color: #ffffff;
+    transform: translateY(-1.5px);
+}
+
+/* --- AUXILIARY ASIDE SYSTEM DECKS --- */
+.ProHelpAsideConsole {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.AsideSystemBentoCard {
+    padding: 2.2rem 2rem;
+    background-color: #0F1422;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.AsideSystemBentoCard h3 {
+    font-size: 18px;
+    font-family: var(--Font3), sans-serif;
     margin-bottom: 0.8rem;
-    letter-spacing: -0.5px;
+    font-weight: 700;
+    color: #ffffff;
 }
 
-.SuccessModalContent p {
-    color: #555;
-    font-size: 1.05rem;
-    line-height: 1.5;
+.AsideSystemBentoCard p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.EmergencyRedBorderCard {
+    border-color: rgba(255, 77, 77, 0.15);
+}
+
+.EmergencyRedBorderCard h3 {
+    color: #ff4d4d;
+}
+
+.EmergencyRedBorderCard p {
     margin-bottom: 1.8rem;
 }
 
-.SuccessModalContent p strong {
-    color: #895CF5;
-    /* Purple highlight for the email address */
+.EmergencyTriggerLink {
+    color: #ff4d4d;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.2s ease;
 }
 
-/* Purple Button Theme */
-.CloseSuccessBtn {
-    background-color: #895CF5;
-    color: #fff;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    font-family: var(--Font3, sans-serif);
-    cursor: pointer;
-    transition: 0.2s ease;
-    box-shadow: 0 4px 15px rgba(137, 92, 245, 0.3);
+.EmergencyTriggerLink:hover {
+    transform: translateX(3px);
 }
 
-.CloseSuccessBtn:hover {
-    background-color: #7244d4;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(137, 92, 245, 0.4);
+/* --- SUCCESS OVERLAY MODE SPECIAL ADDITIONS --- */
+.CyberModalSuccessIcon {
+    font-size: 64px;
+    color: var(--accent-cyan);
+    margin-bottom: 6px;
+}
+
+.CustomWidthBtn {
+    border-radius: 50px !important;
+    margin-top: 10px;
+}
+
+/* --- RESPONSIVE CONTRACTION SYSTEMS --- */
+@media (max-width: 1024px) {
+    .ProHelpLayoutContainer {
+        padding: 0 2rem;
+    }
+
+    .ProHelpGridCore {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .ProHelpInputGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .ProHelpTerminalForm {
+        padding: 1.5rem;
+    }
 }

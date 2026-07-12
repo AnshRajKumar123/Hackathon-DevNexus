@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import '../ComponentCSS/ReportAFraud.css'
+import '../ComponentCSS/ReportAFraud.css';
 import { Link } from "react-router-dom";
 import Toast from "./Toast";
 import emailjs from '@emailjs/browser';
+import { parklyFraudData } from "../assets/assest";
 
 const ReportFraud = () => {
     const [formData, setFormData] = useState({
@@ -14,14 +15,7 @@ const ReportFraud = () => {
     const [evidencePreview, setEvidencePreview] = useState(null);
     const [loading, setLoading] = useState(false);
     const [toast, setToast] = useState({ show: false, message: "", type: "" });
-
-    // 1. NEW: State to control the success pop-up
     const [showPopup, setShowPopup] = useState(false);
-
-    const fraudReasons = [
-        "Payment Fraud", "Fake Booking Activity", "Scam Call / Message",
-        "Suspicious Parking Profile", "Impersonation of Parkly Team", "Other",
-    ];
 
     const showToast = (msg, type = "success") => {
         setToast({ show: true, message: msg, type });
@@ -67,7 +61,6 @@ const ReportFraud = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const error = validateForm();
         if (error) {
             showToast(error, "error");
@@ -88,26 +81,13 @@ const ReportFraud = () => {
 
         try {
             await emailjs.send(
-                'service_tqebzee',    // e.g., 'service_abc123'
-                'template_vpp2w4c',   // e.g., 'template_xyz456'
+                'service_tqebzee',
+                'template_vpp2w4c',
                 templateParams,
-                'b1aE1ZGhkj_rEMlbt'     // e.g., 'user_a1b2c3d4e5'
+                'b1aE1ZGhkj_rEMlbt'
             );
-
             setLoading(false);
-
-            // Reset form
-            setFormData({
-                fullName: "", email: "", mobile: "",
-                accusedName: "", city: "", message: "",
-            });
-            setReason("");
-            setEvidence(null);
-            setEvidencePreview(null);
-
-            // 2. NEW: Show the pop-up instead of redirecting
             setShowPopup(true);
-
         } catch (err) {
             console.error('FAILED...', err);
             setLoading(false);
@@ -115,124 +95,136 @@ const ReportFraud = () => {
         }
     };
 
+    const resetComplianceSession = () => {
+        setFormData({ fullName: "", email: "", mobile: "", accusedName: "", city: "", message: "" });
+        setReason("");
+        setEvidence(null);
+        setEvidencePreview(null);
+        setShowPopup(false);
+    };
+
     return (
-        <>
+        <div className="ProFraudLayoutContainer">
             {toast.show && <Toast message={toast.message} type={toast.type} />}
 
-            <section className="ReportSection">
-                <section className="HelpSectBanner">
-                    <h1>Report a Potential Fraud</h1>
-                </section>
+            {/* Upper Structural Header */}
+            <header className="ProFraudHeaderDeck">
+                <span className="ProTaglineText AlertColor">{parklyFraudData.tagline}</span>
+                <h1>{parklyFraudData.title}</h1>
+            </header>
 
-                <section className="HelpFormSection">
-                    <form className="HelpForm" onSubmit={handleSubmit}>
+            <main className="ProFraudGridCore">
 
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input name="fullName" type="text" className="input-field" value={formData.fullName} onChange={handleChange} placeholder=" " required />
-                            <label className="input-label">Full Name</label>
+                {/* Core Threat Reporting Form */}
+                <form className="ProFraudTerminalForm" onSubmit={handleSubmit}>
+
+                    <div className="ProFraudInputGrid">
+                        <div className="ProFraudFieldBlock">
+                            <label>Reporter Full Name</label>
+                            <input name="fullName" type="text" value={formData.fullName} onChange={handleChange} placeholder={parklyFraudData.placeholders.name} required />
                         </div>
-
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input name="email" type="email" className="input-field" value={formData.email} onChange={handleChange} placeholder=" " required />
-                            <label className="input-label">Email Address</label>
-                        </div>
-
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input name="mobile" type="text" className="input-field" value={formData.mobile} onChange={handleChange} placeholder=" " required />
-                            <label className="input-label">Mobile Number</label>
-                        </div>
-
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input name="accusedName" type="text" className="input-field" value={formData.accusedName} onChange={handleChange} placeholder=" " required />
-                            <label className="input-label">Person / Organization Being Reported</label>
-                        </div>
-
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input name="city" type="text" className="input-field" value={formData.city} onChange={handleChange} placeholder=" " required />
-                            <label className="input-label">City</label>
-                        </div>
-
-                        <div className="fraud-reason-section">
-                            <h3>Select Type of Fraud</h3>
-                            <div className="fraud-reason-options">
-                                {fraudReasons.map((r) => (
-                                    <label key={r} className="reasonLabel">
-                                        <input type="radio" value={r} checked={reason === r} onChange={(e) => setReason(e.target.value)} />
-                                        <span>{r}</span>
-                                    </label>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="input-box TextAreaBox">
-                            <span className="input-accent"></span>
-                            <textarea name="message" className="input-field textarea-field" value={formData.message} onChange={handleChange} placeholder=" " required ></textarea>
-                            <label className="input-label">Message (Details)</label>
-                            <div className="char-count">{formData.message.length}/500</div>
-                        </div>
-
-                        <div className="upload-box" onDragOver={handleDragOver} onDrop={handleDrop}>
-                            {!evidence ? (
-                                <div className="upload-content">
-                                    <i className="bx bx-upload upload-icon"></i>
-                                    <p>Drag & drop evidence here or <span>browse</span></p>
-                                    <input type="file" accept="image/*,application/pdf" onChange={handleFile} />
-                                </div>
-                            ) : (
-                                <div className="upload-preview">
-                                    {evidencePreview ? (
-                                        <img src={evidencePreview} alt="Preview" />
-                                    ) : (
-                                        <div className="pdf-preview">
-                                            <i className="bx bxs-file-pdf pdf-icon"></i>
-                                            <p>{evidence.name}</p>
-                                        </div>
-                                    )}
-                                    <button type="button" className="remove-file-btn" onClick={() => { setEvidence(null); setEvidencePreview(null); }}>Remove</button>
-                                </div>
-                            )}
-                        </div>
-
-                        <p className="SomeTermsOfCond">
-                            This channel is only for reporting suspected fraud or violation of
-                            Parkly’s Code of Conduct. Not for booking-related issues.
-                        </p>
-
-                        <button type="submit" className="SubmitButton" disabled={loading}>
-                            {loading ? "Submitting..." : "Submit Report"}
-                        </button>
-                    </form>
-
-                    <div className="infoReportBoxes">
-                        <div className="SafetyEmergency">
-                            <h1>Disclaimer</h1>
-                            <p>Please use this form only to report potential fraud. For any parking booking or general help:</p>
-                            <Link to="/help-support">Contact Support Here</Link>
+                        <div className="ProFraudFieldBlock">
+                            <label>Secure Email Address</label>
+                            <input name="email" type="email" value={formData.email} onChange={handleChange} placeholder={parklyFraudData.placeholders.email} required />
                         </div>
                     </div>
-                </section>
-            </section>
 
-            {/* 3. NEW: The Success Pop-up Modal */}
+                    <div className="ProFraudInputGrid">
+                        <div className="ProFraudFieldBlock">
+                            <label>Mobile Number Link</label>
+                            <input name="mobile" type="text" value={formData.mobile} onChange={handleChange} placeholder={parklyFraudData.placeholders.mobile} required />
+                        </div>
+                        <div className="ProFraudFieldBlock">
+                            <label>Target Accused Entity</label>
+                            <input name="accusedName" type="text" value={formData.accusedName} onChange={handleChange} placeholder={parklyFraudData.placeholders.accused} required />
+                        </div>
+                    </div>
+
+                    <div className="ProFraudFieldBlock">
+                        <label>Geographic Incident City</label>
+                        <input name="city" type="text" value={formData.city} onChange={handleChange} placeholder={parklyFraudData.placeholders.city} required />
+                    </div>
+
+                    {/* Highly Professional Grid Selection Modules */}
+                    <div className="ProFraudRadioSection">
+                        <h3>Select Core Vector Violation</h3>
+                        <div className="ProFraudRadioOptionsGrid">
+                            {parklyFraudData.fraudReasons.map((r) => (
+                                <label key={r} className={`ProRadioLabelSlot ${reason === r ? 'radio-slot-active' : ''}`}>
+                                    <input type="radio" value={r} checked={reason === r} onChange={(e) => setReason(e.target.value)} />
+                                    <span>{r}</span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="ProFraudFieldBlock TextareaFieldBlock">
+                        <label>Incident Operational Narrative Details</label>
+                        <textarea name="message" value={formData.message} onChange={handleChange} placeholder={parklyFraudData.placeholders.message} maxLength={500} required></textarea>
+                        <div className="ProCharCounterText">{formData.message.length} / 500 Characters</div>
+                    </div>
+
+                    {/* File Drop Matrix Zone */}
+                    <div className="ProUploadTerminalZone" onDragOver={handleDragOver} onDrop={handleDrop}>
+                        {!evidence ? (
+                            <div className="ZoneUploadPromptContent">
+                                <i className="bx bx-shield-quarter ZoneUploadPromptIcon ThreatColor"></i>
+                                <p>Drag and drop forensic verification files here or <span className="BrowseActionHighlight ThreatLink">browse system storage</span></p>
+                                <input type="file" accept="image/*,application/pdf" onChange={handleFile} />
+                            </div>
+                        ) : (
+                            <div className="ZoneUploadPreviewState">
+                                {evidencePreview ? (
+                                    <img src={evidencePreview} alt="Forensic Evidence Data Matrix" />
+                                ) : (
+                                    <div className="ProPdfPreviewBox">
+                                        <i className="bx bxs-file-pdf ForensicPdfIcon"></i>
+                                        <p>{evidence.name}</p>
+                                    </div>
+                                )}
+                                <button type="button" className="ZoneRemoveImageCTA" onClick={() => { setEvidence(null); setEvidencePreview(null); }}>
+                                    Purge Evidence File
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+                    <p className="ProFormWarningDisclaimerText">
+                        <i className='bx bx-info-circle'></i> {parklyFraudData.disclaimer}
+                    </p>
+
+                    <button type="submit" className="ProFraudSubmitCTA" disabled={loading}>
+                        {loading ? "Processing Compliance Ledger..." : "Deploy System Threat Report"}
+                    </button>
+                </form>
+
+                {/* Right Bento Aside Panel */}
+                <aside className="ProFraudAsideConsole">
+                    <div className="AsideSystemBentoCard GenericHelpInfoCard">
+                        <h3>{parklyFraudData.sideCards.support.title}</h3>
+                        <p>{parklyFraudData.sideCards.support.description}</p>
+                        <Link to="/helpsupport" className="StandardSupportVectorLink">
+                            {parklyFraudData.sideCards.support.cta} <i className='bx bx-right-arrow-alt'></i>
+                        </Link>
+                    </div>
+                </aside>
+
+            </main>
+
+            {/* SEAMLESS COMPLIANCE SECURE MODAL OVERLAY */}
             {showPopup && (
-                <div className="SuccessModalOverlay" onClick={() => setShowPopup(false)}>
-                    <div className="SuccessModalContent" onClick={(e) => e.stopPropagation()}>
-                        <div className="SuccessEmoji">✅</div>
-                        <h2>Report Submitted!</h2>
-                        <p>Thank you for bringing this to our attention. Our team will review your report immediately to keep Parkly safe.</p>
-                        <button className="CloseSuccessBtn" onClick={() => setShowPopup(false)}>
-                            Done
+                <div className="ProModalOverlay">
+                    <div className="ProModalCard TextAlignCenter CustomAlertBorder">
+                        <div className="CyberModalSuccessIcon ShieldThreatColor"><i className='bx bx-check-shield'></i></div>
+                        <h2>{parklyFraudData.successModal.title}</h2>
+                        <p>{parklyFraudData.successModal.description}</p>
+                        <button className="ProModalSubmitBtn AlertBgBtn" onClick={resetComplianceSession}>
+                            {parklyFraudData.successModal.btnText}
                         </button>
                     </div>
                 </div>
             )}
-
-        </>
+        </div>
     );
 };
 

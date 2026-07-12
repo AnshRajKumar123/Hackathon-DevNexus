@@ -271,3 +271,84 @@ export const parklyHistoryData = {
         closeBtn: "Close Session"
     }
 };
+
+export const parklyHelpData = {
+    tagline: "Support Terminal",
+    title: "System Help & Communications",
+    defaultOption: "How can we help you?",
+    options: [
+        "I have an issue with my parking booking.",
+        "My Parkly app/website is not working.",
+        "I want to share feedback or a suggestion.",
+    ],
+    faqs: {
+        "I have an issue with my parking booking.": [
+            "Where is my booked slot?",
+            "Someone is parked in my slot.",
+            "QR Code is not scanning at the gate.",
+            "Refund for cancellation not received.",
+        ],
+        "My Parkly app/website is not working.": [
+            "Website is crashing.",
+            "Location detection is failing.",
+            "Payment not going through.",
+        ],
+        "I want to share feedback or a suggestion.": [
+            "I want to suggest a new parking location.",
+            "I want to suggest a new feature.",
+            "Report website UX/UI issue.",
+        ],
+    },
+    placeholders: {
+        name: "Enter full legal name",
+        email: "Enter validation email",
+        phone: "Enter optional mobile link",
+        message: "Describe your systemic terminal issue..."
+    },
+    sideCards: {
+        emergency: {
+            title: "Report a Safety Emergency",
+            description: "We are committed to the safety of everyone using the Parkly infrastructure grid network.",
+            cta: "Initialize Emergency Ticket"
+        },
+        activeBooking: {
+            title: "Active Booking Variance?",
+            description: "Verify operational parameters inside your Booked History deck, or interface directly with the ground attendant listed on your pass validation token."
+        }
+    },
+    successModal: {
+        title: "Transmission Received!",
+        description: "Your service ticket has been routed. Operational response matrix will update you at ",
+        btnText: "Terminate Overlay Session"
+    }
+};
+
+export const parklyFraudData = {
+    tagline: "Compliance Vector",
+    title: "Security & Fraud Reporting Terminal",
+    fraudReasons: [
+        "Payment Fraud", "Fake Booking Activity", "Scam Call / Message",
+        "Suspicious Parking Profile", "Impersonation of Parkly Team", "Other",
+    ],
+    placeholders: {
+        name: "Enter full legal identity name",
+        email: "Enter validation email channel",
+        mobile: "Enter 10-digit primary mobile line",
+        accused: "Enter suspect entity, person, or organization info",
+        city: "Enter geographic operational city",
+        message: "Provide comprehensive structural evidence log breakdown details..."
+    },
+    disclaimer: "This secure channel is strictly reserved for reporting suspected system fraud, bad actors, or severe violations of the Parkly Code of Conduct. General booking issues must be addressed via support vectors.",
+    sideCards: {
+        support: {
+            title: "General Inquiries Disclaimer",
+            description: "Please utilize this secure system form exclusively for potential fraud validation. For standard operational parking booking issues or normal inquiries:",
+            cta: "Access Standard Support Terminal"
+        }
+    },
+    successModal: {
+        title: "Report Committed to Ledger!",
+        description: "Thank you for safeguarding the ecosystem infrastructure grid. Our internal security integrity team will review your submitted evidence parameters immediately.",
+        btnText: "Terminate Compliance Session"
+    }
+};
