@@ -1,108 +1,179 @@
-footer {
-    width: 100vw;
-    height: 60vh;
-    padding: 80px 240px;
-    background-color: #000;
-    overflow: hidden;
+/* ==========================================================================
+   🌟 PARKLY ENTERPRISE CORPORATE FOOTER SHEETS
+   ========================================================================== */
+
+.ProFooterWrapper {
+    width: 100%;
+    background-color: #0A0D14;
+    /* Deep premium midnight base background */
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 5rem 4rem 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
-.WebLogoFooter {
+/* --- CORE FOOTER LAYOUT STRUCTURE --- */
+.FooterCoreGrid {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+/* Brand Panel Alignment Setup */
+.FooterBrandPanel {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    padding-bottom: 2rem;
 }
 
 .WebLogoFooter img {
-    width: 180px;
+    height: 36px;
+    object-fit: contain;
     filter: saturate(0) brightness(5);
+    /* Clean white tracking filter */
+}
+
+/* Side-by-Side App Store Anchors */
+.FooterAppBadges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.BadgeLink img {
+    height: 40px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.BadgeLink:hover img {
+    transform: translateY(-2px);
+}
+
+/* --- LINKS PANEL DECK MESH --- */
+.FooterLinksContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+}
+
+.FooterLinkColumn h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.FooterLinkColumn ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.FooterLinkColumn ul li a,
+.FooterLinkColumn ul li Link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
     cursor: pointer;
 }
 
-.FlexFooterLine {
+.FooterLinkColumn ul li a:hover {
+    color: var(--accent-cyan);
+}
+
+/* --- SOCIAL LINK SHIELDS --- */
+.SocialIconsRow {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 5rem;
-    color: #fff;
-    margin: 30px 0 0 20px;
+    align-items: center;
+    gap: 14px;
 }
 
-.FlexFooterLine ul {
-    list-style: none;
-}
-
-.FlexFooterLine ul li b {
-    font-size: 24px;
-    font-weight: 500;
-    font-family: var(--Font3);
-    letter-spacing: -0.5px;
-    color: #fff;
-    margin: 0;
-}
-
-.FlexFooterLine ul li a {
+.SocialIconsRow a {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     text-decoration: none;
-    color: #ffffff67;
 }
 
-.FlexFooterLine ul li:nth-child(2) {
-    margin-top: 10px;
-}
-
-.FlexFooterLine ul:last-child li:nth-child(2) i {
-    padding: 5px;
+.SocialIconsRow a i {
     font-size: 18px;
 }
 
-.FlexFooterLine ul:last-child li:nth-child(3) img {
-    width: 170px;
-    padding-top: 20px;
+.SocialIconsRow a:hover {
+    background-color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    color: var(--bg-midnight);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 242, 254, 0.2);
 }
 
-.FlexFooterLine ul:last-child li:nth-child(4) img {
-    width: 180px;
-    padding-top: 20px;
-}
-
-.FlexFooterLine ul li a:hover {
-    color: #ffffffe1;
-}
-
-.HoriLine {
-    height: .1px;
+/* --- LOWER FOOTER BAR DETAILS --- */
+.FooterDividerLine {
+    height: 1px;
     width: 100%;
-    margin-top: 20px;
-    background-color: #ffffff75;
-    border: none;
+    max-width: 1300px;
+    background-color: rgba(255, 255, 255, 0.03);
+    margin: 3rem auto 1.5rem auto;
+}
+
+.FooterBottomBar {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 .BoxiBtn {
-    margin-top: 10px;
-    font-size: 11px;
-    letter-spacing: 0.2px;
-    width: 80%;
-    color: #ffffff88;
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(240, 253, 253, 0.4);
+    font-weight: 500;
 }
 
-@media (max-width: 440px) {
-    footer {
-        height: 105vh;
-        padding: 30px;
+/* --- FLUID RESPONSIVE SYSTEM SHIFTS --- */
+@media (max-width: 1024px) {
+    .FooterLinksContainer {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem 2rem;
     }
 
-    .WebLogoFooter img {
-        width: 70px;
+    .FooterBrandPanel {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
     }
 
-    .WebLogoFooter h1 {
-        font-size: 2rem;
+    .ProFooterWrapper {
+        padding: 4rem 2rem 2rem 2rem;
     }
+}
 
-    .FlexFooterLine {
-        margin: 30px 0 0 0;
-    }
-
-    .FlexFooterLine ul:nth-child(5) {
-        margin-bottom: 100px;
+@media (max-width: 600px) {
+    .FooterLinksContainer {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 }

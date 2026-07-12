@@ -1,90 +1,147 @@
-.ChoosingSection {
-    margin-bottom: 8rem;
-    height: 450px;
+/* ==========================================================================
+   🌟 PARKLY ENTERPRISE OPTIMIZED CHOOSING CORE SHEETS
+   ========================================================================== */
+
+.ProChoosingSection {
     width: 100%;
-    display: flex;
+    max-width: 1300px;
+    margin: 6rem auto 8rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 6rem;
     align-items: center;
-    justify-content: center;
-    gap: 23rem;
 }
 
-.LeftSider h1 {
-    font-family: var(--Font3);
+/* --- LEFT SIDE TYPOGRAPHY MATRIX --- */
+.ChoosingLeftSider {
+    display: flex;
+    flex-direction: column;
+}
+
+.ChoosingTagline {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-cyan);
+    margin-bottom: 8px;
+}
+
+.ChoosingLeftSider h1 {
+    font-family: var(--Font3), sans-serif;
     font-size: 3rem;
-    letter-spacing: -2px;
-    position: relative;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    color: #ffffff;
+    line-height: 1.1;
 }
 
-.LeftSider h1::before {
-    position: absolute;
-    content: '';
-    height: 5px;
-    background-color: #895CF5;
-    width: 60px;
-    bottom: -2px;
-    right: 34%;
-    border-radius: 6px;
-}
-
-.LeftSider p {
-    width: 500px;
+.ChoosingLeftSider p {
+    font-size: 15px;
+    line-height: 1.7;
     font-weight: 500;
-    letter-spacing: 0.3px;
-    line-height: 23px;
-    margin: 2.51rem 0;
+    color: var(--text-secondary);
+    margin: 2rem 0;
 }
 
-.EditedBtn{
-    color: #fff;
+/* --- PREMIUM INTERACTIVE CTA BUTTON --- */
+.ProEnterpriseBtn {
+    align-self: flex-start;
+    color: var(--bg-midnight);
+    background-color: var(--accent-cyan);
     border: none;
     cursor: pointer;
-    padding: 12px 35px;
-    border-radius: 50px;
-    overflow: hidden;
-    font-size: 19px;
-    font-family: var(--Font3);
-    letter-spacing: -0.2px;
-    background-color: #0F0725;
-    box-shadow: 7px 7px 14px #2a1663,
-                -7px -7px 14px #2d1e5b;
-    position: relative;
-    z-index: 1;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.EditedBtn::before {
-    position: absolute;
-    content: '';
-    height: 100%;
-    width: 0%;
-    background-color: #5b19f4;
-    top: 0;
-    left: 0;
-    border-radius: 50px;
-    z-index: -1;
-    display: block;
-    transition: 0.4s ease-in-out;
+.ProEnterpriseBtn i {
+    font-size: 18px;
+    transition: transform 0.25s ease;
 }
 
-.EditedBtn:hover::before {
+.ProEnterpriseBtn:hover {
+    background-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+.ProEnterpriseBtn:hover i {
+    transform: translateX(4px);
+}
+
+/* --- RIGHT QUAD-GRID VISUAL CANVAS --- */
+.ChoosingRightSider {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
     width: 100%;
 }
 
-.RightSider {
+.MatrixQuadRow {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    gap: 10px;
+    gap: 1.5rem;
 }
 
-.RightSider div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.MatrixImageWrapper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #111622;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.RightSider img {
-    height: 200px;
-    width: 260px;
+.MatrixImageWrapper img {
+    width: 100%;
+    height: 190px;
     object-fit: cover;
-    border-radius: 5px;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Offset geometric layout constraints */
+.SpacerDown {
+    margin-top: 1.5rem;
+}
+
+.SpacerUp {
+    margin-top: -1.5rem;
+}
+
+/* --- INTERACTIONS --- */
+.MatrixImageWrapper:hover {
+    border-color: rgba(0, 242, 254, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 242, 254, 0.05);
+    transform: scale(1.02);
+}
+
+.MatrixImageWrapper:hover img {
+    transform: scale(1.05);
+}
+
+/* --- BREAKPOINT CONTRACTIONS --- */
+@media (max-width: 1024px) {
+    .ProChoosingSection {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        padding: 0 2rem;
+    }
+
+    .SpacerDown,
+    .SpacerUp {
+        margin-top: 0;
+    }
 }

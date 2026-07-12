@@ -1,31 +1,43 @@
-import React from 'react'
-import '../ComponentCSS/ChoosingUs.css'
-import { ImageCenter } from '../assets/assest'
+import React from 'react';
+import '../ComponentCSS/ChoosingUs.css';
+import { ImageCenter, parklyChoosingData } from '../assets/assest';
 
 const ChoosingUs = () => {
     return (
-        <>
-            <section className='ChoosingSection'>
-                <div className="LeftSider">
-                    <h1>Why Choose Us</h1>
+        <section className='ProChoosingSection'>
+            
+            {/* Left Console Split Frame */}
+            <div className="ChoosingLeftSider">
+                <span className="ChoosingTagline">{parklyChoosingData.tagline}</span>
+                <h1>{parklyChoosingData.title}</h1>
+                <p>{parklyChoosingData.description}</p>
+                <button className='ProEnterpriseBtn'>
+                    {parklyChoosingData.cta} <i className='bx bx-right-arrow-alt'></i>
+                </button>
+            </div>
 
-                    <p>Experience the future of parking with our seamless QR-based booking system. Simply reserve your spot online to receive a unique digital pass. Upon arrival, scan your QR code at the entrance for instant access—no tickets, no cash, and no delays. We offer secure, well-lit facilities and real-time navigation, ensuring a fast, safe, and entirely contactless parking experience every time.</p>
-
-                    <button className='EditedBtn'>Read More !!</button>
-                </div>
-                <div className="RightSider">
-                    <div>
-                        <img src={ImageCenter.Photo1} />
-                        <img src={ImageCenter.Photo2} />
+            {/* Right Quad Visual Matrix Frame */}
+            <div className="ChoosingRightSider">
+                <div className="MatrixQuadRow">
+                    <div className="MatrixImageWrapper">
+                        <img src={ImageCenter.Photo1} alt="Terminal System 1" />
                     </div>
-                    <div>
-                        <img src={ImageCenter.Photo3} />
-                        <img src={ImageCenter.Photo4} />
+                    <div className="MatrixImageWrapper SpacerDown">
+                        <img src={ImageCenter.Photo2} alt="Terminal System 2" />
                     </div>
                 </div>
-            </section>
-        </>
-    )
-}
+                <div className="MatrixQuadRow">
+                    <div className="MatrixImageWrapper SpacerUp">
+                        <img src={ImageCenter.Photo3} alt="Terminal System 3" />
+                    </div>
+                    <div className="MatrixImageWrapper">
+                        <img src={ImageCenter.Photo4} alt="Terminal System 4" />
+                    </div>
+                </div>
+            </div>
 
-export default ChoosingUs
+        </section>
+    );
+};
+
+export default ChoosingUs;

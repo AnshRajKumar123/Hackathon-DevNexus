@@ -104,3 +104,89 @@ export const parklyFeaturesData = {
         }
     ]
 };
+
+export const parklyChoosingData = {
+    tagline: "The Parkly Advantage",
+    title: "Why Choose Us",
+    description: "Experience the future of parking with our seamless QR-based booking system. Simply reserve your spot online to receive a unique digital pass. Upon arrival, scan your QR code at the entrance for instant access—no tickets, no cash, and no delays. We offer secure, well-lit facilities and real-time navigation, ensuring a fast, safe, and entirely contactless parking experience every time.",
+    cta: "Explore Ecosystem"
+};
+
+export const parklyPricingData = {
+    tagline: "Transparent Rates",
+    title: "Flexible Plans for Every Driver",
+    plans: [
+        {
+            title: "Basic",
+            price: "₹35",
+            period: "/ hour",
+            description: "An affordable, budget-friendly parking solution. It provides essential, reliable spots for short-term stays, ensuring a seamless and cost-effective urban parking experience.",
+            bgImage: ImageCenter.Photo1, // 📸 Maps a clean asset image layer
+            isFeatured: false
+        },
+        {
+            title: "Standard",
+            price: "₹50",
+            period: "/ hour",
+            description: "Strikes the perfect balance between affordability and convenience. It offers a reliable, mid-tier parking solution for everyday drivers seeking quality and value.",
+            bgImage: ImageCenter.Photo2,
+            isFeatured: true // Highlights this tier as the flagship choice
+        },
+        {
+            title: "Premium",
+            price: "₹75",
+            period: "/ hour",
+            description: "Delivers the ultimate parking experience, offering prime, high-security spots and priority access. It ensures maximum convenience and peace of mind for drivers.",
+            bgImage: ImageCenter.Photo3,
+            isFeatured: false
+        }
+    ]
+};
+
+
+export const parklyFooterData = {
+    companyColumn: {
+        title: "Company",
+        links: [
+            { label: "PARKLY", path: "#" },
+            { label: "Serving India", path: "#" },
+            { label: "Investor Relations", path: "#" }
+        ]
+    },
+    businessColumn: {
+        title: "For Business",
+        links: [
+            { label: "Partner with Us", path: "#" },
+            { label: "Apps for you", path: "#" }
+        ]
+    },
+    placesColumn: {
+        title: "Parking Places",
+        links: [
+            { label: "Delhi", path: "#" },
+            { label: "Mumbai", path: "#" },
+            { label: "Chandigarh", path: "#" },
+            { label: "Punjab", path: "#" }
+        ]
+    },
+    legalColumn: {
+        title: "Legal",
+        links: [
+            { label: "Privacy", path: "#", isRouter: false },
+            { label: "Security", path: "#", isRouter: false },
+            { label: "Terms of Service", path: "#", isRouter: false },
+            { label: "Help and Support", path: "/helpsupport", isRouter: true },
+            { label: "Report a Fraud", path: "/reportfraud", isRouter: true }
+        ]
+    },
+    socials: {
+        title: "Connect With Us",
+        links: [
+            { icon: "bx bxl-linkedin", url: "#" },
+            { icon: "bx bxl-instagram", url: "https://www.instagram.com/midnightnfood/" },
+            { icon: "bx bxl-facebook", url: "#" },
+            { icon: "bx bxl-twitter", url: "#" }
+        ]
+    },
+    disclaimer: "By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners 2008-2026 © Parkly Ltd. All rights reserved."
+};
