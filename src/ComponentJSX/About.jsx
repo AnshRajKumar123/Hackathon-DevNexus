@@ -15,45 +15,6 @@ const About = () => {
         return () => { document.body.style.overflow = "auto"; };
     }, [selectedMember]);
 
-    const teamMembers = [
-        {
-            img: ImageCenter.AyushPhoto,
-            name: "Golu Kumar",
-            role: "Team Leader & FrontEnd Developer",
-            bio: "Ayush leads MNF’s technical direction and system integration modules seamlessly.",
-            skills: ["Leadership", "Product Strategy", "Team Management"],
-            social: {
-                instagram: "https://www.instagram.com/offical_ayush_100/",
-                linkedin: "https://linkedin.com/in/ayush-here",
-                email: "mailto:ayush.kbc.695@gmail.com"
-            }
-        },
-        {
-            img: ImageCenter.AnshPhoto,
-            name: "Ansh Raj",
-            role: "FrontEnd Developer",
-            bio: "Ansh designs fluid, high-fidelity UI layout architecture interfaces with extreme precision.",
-            skills: ["React.js", "UI/UX Layout", "CSS Engineering"],
-            social: {
-                instagram: "https://www.instagram.com/its_ansh_raj_874/",
-                linkedin: "https://www.linkedin.com/in/golu-kumar-375992392/",
-                email: "mailto:golu.kkpncc.99008@gmail.com"
-            }
-        },
-        {
-            img: ImageCenter.AdityaPhoto,
-            name: "Aditya Raj",
-            role: "BackEnd Developer",
-            bio: "Aditya builds stable enterprise database architectures and core routing APIs.",
-            skills: ["Node.js", "APIs Core", "Database Design"],
-            social: {
-                instagram: "https://www.instagram.com/adityathakur_911/",
-                linkedin: "https://www.linkedin.com/in/aditya-raj-911-/",
-                email: "mailto:adityaraj9112009@gmail.com"
-            }
-        }
-    ];
-
     return (
         <div className="ProAboutLayoutContainer">
 
