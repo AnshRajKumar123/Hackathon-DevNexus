@@ -1,180 +1,294 @@
-/* --- Booked History Page Styles --- */
+/* ==========================================================================
+   🌟 PARKLY ENTERPRISE TRANSACTION HISTORY MANAGEMENT LOG
+   ========================================================================== */
 
-.HistoryTabsContainer {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.HistoryTabBtn {
-    padding: 10px 25px;
-    border-radius: 50px;
-    border: 1px solid #ddd;
-    background: #fff;
-    color: #555;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
-}
-
-.HistoryTabBtn.active {
-    background: var(--primary-color);
-    color: #fff;
-    border-color: var(--primary-color);
-}
-
-.HistoryEmptyState {
-    text-align: center;
-    margin-top: 40px;
-    padding: 40px;
-    background: #f9f9f9;
-    border-radius: 15px;
-}
-
-.HistoryEmptyState h3 {
-    color: #555;
-    margin-bottom: 10px;
-}
-
-.HistoryEmptyState p {
-    color: #888;
-}
-
-.HistoryListContainer {
+.ProHistoryWrapper {
+    width: 100%;
+    max-width: 1300px;
+    margin: 120px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-width: 800px;
-    margin: 0 auto;
-    margin-top: 30px;
+    gap: 2.5rem;
 }
 
-.HistoryCard {
-    background: #fff;
-    padding: 20px 25px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+.HistoryHeadlineBlock h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.SelectedLocText {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+}
+
+/* --- TAB SEPARATION HEADERS --- */
+.ProHistoryTabsContainer {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    padding-bottom: 12px;
+}
+
+.ProHistoryTabBtn {
+    background-color: #0F1422;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    font-family: var(--Font3), sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ProHistoryTabBtn:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.ProHistoryTabBtn.tab-active {
+    background-color: var(--accent-cyan);
+    color: var(--bg-midnight);
+    border-color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+/* --- LOG ENTRY EMPTY CONTAINER --- */
+.ProHistoryEmptyState {
+    text-align: center;
+    padding: 5rem 2rem;
+    background-color: #0F1422;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.EmptyFolderIcon {
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.15);
+    margin-bottom: 1.2rem;
+}
+
+.ProHistoryEmptyState h3 {
+    font-family: var(--Font3), sans-serif;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.ProHistoryEmptyState p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    max-width: 480px;
+    line-height: 1.5;
+}
+
+/* --- TRANSACTION RECORD PANELS --- */
+.ProHistoryListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+.ProHistoryCard {
+    background-color: #0F1422;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
     position: relative;
+    transition: border-color 0.25s ease;
 }
 
-.HistoryCardContent {
-    margin-top: 10px;
+.ProHistoryCard:hover {
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
-.HistoryCardDate {
+.ProHistoryCardContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.ProHistoryCardDate {
+    font-family: var(--Font3), sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
     margin: 0 0 4px 0;
-    color: var(--primary-color);
-    font-size: 1.4rem;
 }
 
-.HistoryCardBookedOn {
-    margin: 0 0 8px 0;
-    font-size: 0.8rem;
-    color: #999;
+.ProHistoryCardBookedOn {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 0 1.2rem 0;
+    font-weight: 500;
 }
 
-.HistoryCardDetails {
-    margin: 0 0 8px 0;
-    color: #444;
-    font-size: 1rem;
+.ProCardMetaGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
 }
 
-.HistoryCardSubDetails {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #777;
+.MetaItem {
+    font-size: 13.5px;
+    color: #ffffff;
 }
 
-.HistoryCardActions {
+.MetaItem span {
+    color: var(--text-secondary);
+    margin-right: 4px;
+}
+
+/* --- CARD INTERACTIONS DECK --- */
+.ProHistoryCardActions {
     display: flex;
     gap: 10px;
     align-items: center;
-    margin-top: 10px;
 }
 
-.CancelTicketBtn {
+.ProCancelTicketBtn {
     background: transparent;
-    color: var(--danger-color);
-    border: 1px solid var(--danger-color);
-    padding: 10px 15px;
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 77, 77, 0.2);
+    padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 13px;
+    font-family: var(--Font3), sans-serif;
     transition: all 0.2s ease;
 }
 
-.CancelTicketBtn:hover {
-    background: #ffebeb;
+.ProCancelTicketBtn:hover {
+    background: rgba(255, 77, 77, 0.06);
+    border-color: #ff4d4d;
 }
 
-.ViewTicketBtn {
-    padding: 10px 25px;
-    font-size: 1rem;
+.ProViewTicketBtn {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+    padding: 10px 22px;
+    font-size: 13.5px;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
     white-space: nowrap;
+    transition: all 0.2s ease;
 }
 
-/* Status Badges */
-.StatusBadge {
-    border-style: solid;
-    border-width: 1px;
+.ProViewTicketBtn:hover {
+    background-color: #ffffff;
+    color: var(--bg-midnight);
+    border-color: #ffffff;
+}
+
+/* --- MICRO STATUS CYBER BADGES --- */
+.ProStatusBadge {
     padding: 4px 12px;
-    border-radius: 50px;
-    font-weight: bold;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.badge-upcoming {
+    background-color: rgba(0, 242, 254, 0.05);
+    border-color: rgba(0, 242, 254, 0.2);
+    color: var(--accent-cyan);
+}
+
+.badge-completed {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+}
+
+.badge-cancelled {
+    background-color: rgba(255, 77, 77, 0.05);
+    border-color: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
 }
 
 .CardBadge {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
+    top: 2rem;
+    right: 2rem;
 }
 
 .ModalBadge {
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 0.7rem;
     z-index: 10;
 }
 
-/* Modal Specific Modifiers */
+/* --- EXTENDED MODAL OVERRIDES --- */
 .RelativeModal {
     position: relative;
 }
 
-.CenteredModalActions {
-    justify-content: center;
-    margin-top: 10px;
-    padding-bottom: 20px;
-}
-
 .AmountPaidRow {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px dashed #eee;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
 }
 
 .AmountPaidValue {
-    color: var(--primary-color);
-    font-size: 1.2rem;
+    color: var(--accent-cyan);
+    font-size: 1.3rem;
 }
 
 .FadedQR {
-    opacity: 0.3;
+    opacity: 0.2;
+    filter: grayscale(1);
 }
 
 .StrikeText {
     text-decoration: line-through;
+    color: rgba(255, 77, 77, 0.6) !important;
+}
+
+/* --- RESPONSIVE CONTRACTIONS --- */
+@media (max-width: 1024px) {
+    .ProHistoryWrapper {
+        padding: 0 2rem;
+    }
+
+    .ProHistoryCard {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .CardBadge {
+        position: static;
+        margin-bottom: -0.5rem;
+    }
+
+    .ProHistoryCardActions {
+        width: 100%;
+        justify-content: flex-end;
+    }
 }

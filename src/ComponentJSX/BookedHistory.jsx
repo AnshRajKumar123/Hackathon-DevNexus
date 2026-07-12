@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../ComponentCSS/BookCenter.css';
-import '../ComponentCSS/BookedHistory.css'
+import '../ComponentCSS/BookedHistory.css';
+import { parklyHistoryData } from '../assets/assest';
 
 const BookedHistory = () => {
     const [history, setHistory] = useState([]);
@@ -59,8 +59,6 @@ const BookedHistory = () => {
         const savedBookedSlots = JSON.parse(localStorage.getItem('bookedParkingSlots')) || [];
         const updatedBookedSlots = savedBookedSlots.filter(slotId => !slotsToFree.includes(slotId));
         localStorage.setItem('bookedParkingSlots', JSON.stringify(updatedBookedSlots));
-
-        alert("Booking cancelled successfully. Slots are now available.");
     };
 
     const formatDate = (isoString) => {
@@ -73,27 +71,29 @@ const BookedHistory = () => {
         return getTicketStatus(ticket) === activeTab;
     });
 
-    const getBadgeStyle = (status) => {
+    const getBadgeClass = (status) => {
         switch (status) {
-            case 'Upcoming': return { bg: '#e8f5e9', color: '#2e7d32', border: '#c8e6c9' };
-            case 'Completed': return { bg: '#f5f5f5', color: '#616161', border: '#e0e0e0' };
-            case 'Cancelled': return { bg: '#ffebee', color: '#c62828', border: '#ffcdd2' };
-            default: return { bg: '#f5f5f5', color: '#616161', border: '#e0e0e0' };
+            case 'Upcoming': return 'badge-upcoming';
+            case 'Completed': return 'badge-completed';
+            case 'Cancelled': return 'badge-cancelled';
+            default: return 'badge-completed';
         }
     };
 
     return (
-        <div className='BookCenter_Section'>
-            <h1 id='Booker_Heading'>Your Booking History</h1>
-            <p className="SelectedLocText BookedHisPara">View your active and past parking tickets.</p>
+        <div className='ProHistoryWrapper'>
+            <div className="HistoryHeadlineBlock">
+                <h1>{parklyHistoryData.title}</h1>
+                <p className="SelectedLocText">{parklyHistoryData.subtitle}</p>
+            </div>
 
-            {/* Navigation Tabs */}
-            <div className="HistoryTabsContainer">
-                {['All', 'Upcoming', 'Completed', 'Cancelled'].map(tab => (
+            {/* Navigation Tabs System */}
+            <div className="ProHistoryTabsContainer">
+                {parklyHistoryData.tabs.map(tab => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`HistoryTabBtn ${activeTab === tab ? 'active' : ''}`}
+                        className={`ProHistoryTabBtn ${activeTab === tab ? 'tab-active' : ''}`}
                     >
                         {tab}
                     </button>
@@ -101,48 +101,46 @@ const BookedHistory = () => {
             </div>
 
             {filteredHistory.length === 0 ? (
-                /* Empty State */
-                <div className="HistoryEmptyState">
-                    <h3>No {activeTab !== 'All' ? activeTab.toLowerCase() : ''} bookings found.</h3>
-                    <p>When you book a parking slot, your digital tickets will appear here.</p>
+                /* Professional Empty State */
+                <div className="ProHistoryEmptyState">
+                    <i className='bx bx-folder-open EmptyFolderIcon'></i>
+                    <h3>{parklyHistoryData.emptyState.title}</h3>
+                    <p>{parklyHistoryData.emptyState.description}</p>
                 </div>
             ) : (
-                /* History List */
-                <div className="HistoryListContainer">
+                /* Clean Structured History List */
+                <div className="ProHistoryListContainer">
                     {filteredHistory.map((booking, index) => {
                         const status = getTicketStatus(booking);
-                        const badgeStyle = getBadgeStyle(status);
+                        const badgeClass = getBadgeClass(status);
 
                         return (
-                            <div key={index} className="HistoryCard">
-
-                                <div
-                                    className="StatusBadge CardBadge"
-                                    style={{ background: badgeStyle.bg, color: badgeStyle.color, borderColor: badgeStyle.border }}
-                                >
+                            <div key={index} className="ProHistoryCard">
+                                <span className={`ProStatusBadge ${badgeClass}`}>
                                     {status}
+                                </span>
+
+                                <div className="ProHistoryCardContent">
+                                    <h3 className="ProHistoryCardDate">{booking.date}</h3>
+                                    <p className="ProHistoryCardBookedOn">Logged on: {formatDate(booking.timestamp)}</p>
+
+                                    <div className="ProCardMetaGroup">
+                                        <div className="MetaItem"><span>ID:</span> <strong>{booking.bookingId}</strong></div>
+                                        <div className="MetaItem"><span>Slots:</span> <strong>{booking.slots.join(', ')}</strong></div>
+                                        <div className="MetaItem"><span>Window:</span> <strong>{booking.inTime} - {booking.outTime}</strong></div>
+                                        <div className="MetaItem"><span>Vehicle:</span> <strong>{booking.plateNumber}</strong></div>
+                                    </div>
                                 </div>
 
-                                <div className="HistoryCardContent">
-                                    <h3 className="HistoryCardDate">{booking.date}</h3>
-                                    <p className="HistoryCardBookedOn">Booked on: {formatDate(booking.timestamp)}</p>
-                                    <p className="HistoryCardDetails">
-                                        <strong>ID:</strong> {booking.bookingId} &nbsp;|&nbsp; <strong>Slots:</strong> {booking.slots.join(', ')}
-                                    </p>
-                                    <p className="HistoryCardSubDetails">
-                                        🕒 {booking.inTime} - {booking.outTime} &nbsp;|&nbsp; 🚗 Vehicle: <strong>{booking.plateNumber}</strong>
-                                    </p>
-                                </div>
-
-                                <div className="HistoryCardActions">
+                                <div className="ProHistoryCardActions">
                                     {status === 'Upcoming' && (
-                                        <button className="CancelTicketBtn" onClick={() => handleCancelBooking(booking.bookingId)}>
-                                            Cancel Ticket
+                                        <button className="ProCancelTicketBtn" onClick={() => handleCancelBooking(booking.bookingId)}>
+                                            Abort Log
                                         </button>
                                     )}
 
-                                    <button className="ConfirmBtn ViewTicketBtn" onClick={() => setSelectedTicket(booking)}>
-                                        View Ticket
+                                    <button className="ProViewTicketBtn" onClick={() => setSelectedTicket(booking)}>
+                                        Open Token
                                     </button>
                                 </div>
                             </div>
@@ -151,32 +149,25 @@ const BookedHistory = () => {
                 </div>
             )}
 
-            {/* Reused Ticket Modal for viewing history */}
+            {/* Clean Cyber Themed Modal Layer */}
             {selectedTicket && (
-                <div className="ModalOverlay" onClick={() => setSelectedTicket(null)}>
-                    <div className="ModalContent TicketContent RelativeModal" onClick={(e) => e.stopPropagation()}>
+                <div className="ProModalOverlay" onClick={() => setSelectedTicket(null)}>
+                    <div className="ProModalCard ProTicketCardBox RelativeModal" onClick={(e) => e.stopPropagation()}>
 
-                        <div
-                            className="StatusBadge ModalBadge"
-                            style={{
-                                background: getBadgeStyle(getTicketStatus(selectedTicket)).bg,
-                                color: getBadgeStyle(getTicketStatus(selectedTicket)).color,
-                                borderColor: getBadgeStyle(getTicketStatus(selectedTicket)).border
-                            }}
-                        >
+                        <span className={`ProStatusBadge ModalBadge ${getBadgeClass(getTicketStatus(selectedTicket))}`}>
                             {getTicketStatus(selectedTicket)}
+                        </span>
+
+                        <div className="ProTicketBannerHeader">
+                            <h2>{parklyHistoryData.ticketModal.title}</h2>
+                            <p>{parklyHistoryData.ticketModal.subtitle}</p>
                         </div>
 
-                        <div className="TicketHeader">
-                            <h2>Parking Ticket</h2>
-                            <p>Show this QR at the gate.</p>
-                        </div>
-
-                        <div className="TicketBody">
-                            <div className="TicketQRContainer">
+                        <div className="ProTicketDataBody">
+                            <div className="ProTicketQRContainer">
                                 <img
                                     src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(selectedTicket.bookingId)}`}
-                                    alt="Access QR Code"
+                                    alt="Access Token QR"
                                     className={getTicketStatus(selectedTicket) === 'Cancelled' ? 'FadedQR' : ''}
                                 />
                                 <h3 className={getTicketStatus(selectedTicket) === 'Cancelled' ? 'StrikeText' : ''}>
@@ -184,20 +175,20 @@ const BookedHistory = () => {
                                 </h3>
                             </div>
 
-                            <div className="TicketDetails">
-                                <div className="DetailRow"><span>Name:</span> <strong>{selectedTicket.name}</strong></div>
-                                <div className="DetailRow"><span>Date:</span> <strong>{selectedTicket.date}</strong></div>
-                                <div className="DetailRow"><span>Time:</span> <strong>{selectedTicket.inTime} to {selectedTicket.outTime}</strong></div>
-                                <div className="DetailRow"><span>Slots:</span> <strong>{selectedTicket.slots.join(', ')}</strong></div>
-                                <div className="DetailRow"><span>Vehicle:</span> <strong>{selectedTicket.plateNumber}</strong></div>
-                                <div className="DetailRow AmountPaidRow">
-                                    <span>Amount Paid:</span> <strong className="AmountPaidValue">₹{selectedTicket.amount}</strong>
+                            <div className="ProTicketDataRows">
+                                <div className="ProTicketRow"><span>Identity:</span> <strong>{selectedTicket.name}</strong></div>
+                                <div className="ProTicketRow"><span>Schedule:</span> <strong>{selectedTicket.date}</strong></div>
+                                <div className="ProTicketRow"><span>Duration:</span> <strong>{selectedTicket.inTime} to {selectedTicket.outTime}</strong></div>
+                                <div className="ProTicketRow"><span>Allocations:</span> <strong>{selectedTicket.slots.join(', ')}</strong></div>
+                                <div className="ProTicketRow"><span>Vehicle ID:</span> <strong>{selectedTicket.plateNumber}</strong></div>
+                                <div className="ProTicketRow AmountPaidRow">
+                                    <span>Authorized Total:</span> <strong className="AmountPaidValue">₹{selectedTicket.amount}</strong>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="ModalActions CenteredModalActions">
-                            <button className="CancelBtn" onClick={() => setSelectedTicket(null)}>Close</button>
+                        <div className="ProModalActionTriggers AlignmentCenter MarginTop20">
+                            <button className="ProModalCancelBtn" onClick={() => setSelectedTicket(null)}>{parklyHistoryData.ticketModal.closeBtn}</button>
                         </div>
                     </div>
                 </div>

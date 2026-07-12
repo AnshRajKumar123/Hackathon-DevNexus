@@ -256,3 +256,18 @@ export const parklyBookData = {
         closeBtn: "Terminate Session"
     }
 };
+
+export const parklyHistoryData = {
+    title: "Your Transaction Matrix",
+    subtitle: "Monitor active clearances and historic entry logs.",
+    tabs: ["All", "Upcoming", "Completed", "Cancelled"],
+    emptyState: {
+        title: "No operational vectors found.",
+        description: "Your digital clearance tokens will register immediately once slots are reserved from the console terminal."
+    },
+    ticketModal: {
+        title: "Terminal Clearance Pass",
+        subtitle: "Present digital signature at physical gateway barrier nodes.",
+        closeBtn: "Close Session"
+    }
+};
