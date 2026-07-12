@@ -1,546 +1,558 @@
-:root {
-    /* Theme Colors */
-    --primary-color: #895CF5;
-    --primary-hover: #7244d4;
-    --danger-color: #ff4d4d;
-    --border-color: #e0e0e0;
-    --accent-black: #1a1a1a;
+/* ==========================================================================
+   🌟 PARKLY CYBER DASHBOARD CONTROLLER SLOTS SCHEMATICS SHEET
+   ========================================================================== */
+
+.ProBookCenterWrapper {
+    width: 100%;
+    max-width: 1300px;
+    margin: 120px auto 6rem auto;
+    /* padding: 0 4rem; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-.BookCenter_Section {
-    margin: 8rem 3rem 3rem 3rem;
-}
-
-#Booker_Heading {
-    font-family: var(--Font3, sans-serif);
-    font-size: 2.2rem;
-    letter-spacing: -0.4px;
+.TerminalHeadlineBlock h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
 }
 
 .SelectedLocText {
-    margin-bottom: 2rem;
-    color: #666;
-    font-size: 0.9rem;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 6px;
 }
 
-.Slider_Of_ParkingSect {
-    margin-top: 1rem;
+/* --- SECTOR TOGGLER ACTION TRACKS --- */
+.ProSectorSliderTrack {
     display: flex;
-    gap: 0.8rem;
+    gap: 10px;
     overflow-x: auto;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.Slider_Of_ParkingSect .BoxAlpha {
-    background-color: #f4f4f4;
-    color: #333;
-    font-family: var(--Font3, sans-serif);
-    padding: 10px 40px;
+.SectorToggleBox {
+    background-color: #0F1422;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    font-family: var(--Font3), sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 28px;
     border-radius: 8px;
-    font-size: 1.2rem;
     cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
     white-space: nowrap;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.Slider_Of_ParkingSect .BoxAlpha.active {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 10px rgba(137, 92, 245, 0.3);
+.SectorToggleBox:hover:not(.sector-saturated) {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
 }
 
-.Slider_Of_ParkingSect .BoxAlpha.full {
-    background-color: var(--danger-color);
-    color: #fff;
+.SectorToggleBox.sector-active {
+    background-color: var(--accent-cyan);
+    color: var(--bg-midnight);
+    border-color: var(--accent-cyan);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
+}
+
+.SectorToggleBox.sector-saturated {
+    background-color: rgba(255, 77, 77, 0.08);
+    border-color: rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
     cursor: not-allowed;
-    opacity: 0.8;
 }
 
-.SectionDetails {
-    margin-top: 3rem;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 15px;
-    color: #000;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-    overflow-x: auto;
+/* --- CENTRAL BENTO BOARD CORE --- */
+.TerminalBentoConsole {
+    background-color: #0F1422;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
 }
 
-.SectionHeader {
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-/* --- Parking Map UI --- */
-.ParkingMapContainer {
+.TerminalConsoleHeader {
     display: flex;
-    justify-content: center;
-    min-width: 100%;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    border-radius: 10px;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 1.2rem;
 }
 
-.ParkingColumn {
+.TerminalConsoleHeader h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.TerminalConsoleHeader span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* --- MATRIX MAP LAYOUT MESH ENGINE --- */
+.ProParkingGridBlueprint {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 24px;
+    border-radius: 12px;
+    overflow-x: auto;
+    gap: 4px;
+}
+
+.ProBlueprintColumn {
     display: flex;
     flex-direction: column;
-    width: 240px;
+    width: 200px;
 }
 
-.ParkingSlot {
-    height: 75px;
-    border: 1px solid var(--border-color);
+.ProBlueprintSlot {
+    height: 72px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.01);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 5px;
-    font-size: 0.8rem;
-    color: #555;
-    background-color: #fff;
+    padding: 6px;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-.ParkingColumn .ParkingSlot+.ParkingSlot {
+.ProBlueprintColumn .ProBlueprintSlot+.ProBlueprintSlot {
     border-top: none;
 }
 
-.ParkingSlot:hover:not(.booked-slot) {
-    background-color: #f0f8ff;
+.ProBlueprintSlot:hover:not(.slot-occupied) {
+    background-color: rgba(0, 242, 254, 0.03);
+    border-color: rgba(0, 242, 254, 0.2);
 }
 
-.ParkingSlot.selected-slot {
-    background-color: var(--accent-black);
-    color: #ffffff;
-    border-color: var(--accent-black);
-    z-index: 1;
+.ProBlueprintSlot.slot-selected {
+    background-color: #ffffff;
+    border-color: #ffffff;
 }
 
-.ParkingSlot.selected-slot .SlotNum {
-    color: #ffffff;
+.ProBlueprintSlot.slot-selected .ProSlotNum {
+    color: var(--bg-midnight);
 }
 
-.ParkingSlot.booked-slot {
-    background-color: var(--danger-color);
-    color: #ffffff;
-    border-color: var(--danger-color);
+.ProBlueprintSlot.slot-selected .ProSlotCat,
+.ProBlueprintSlot.slot-selected .ProSlotPrice {
+    color: rgba(11, 15, 25, 0.6);
+}
+
+.ProBlueprintSlot.slot-occupied {
+    background-color: rgba(255, 77, 77, 0.08);
+    border-color: rgba(255, 77, 77, 0.15);
     cursor: not-allowed;
-    z-index: 1;
 }
 
-.ParkingSlot.booked-slot .SlotNum {
+.ProBlueprintSlot.slot-occupied .ProSlotNum {
+    color: rgba(255, 77, 77, 0.6);
+}
+
+.ProSlotNum {
+    font-weight: 700;
+    font-size: 13px;
     color: #ffffff;
 }
 
-.SlotNum {
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: #555;
-    transition: color 0.2s ease;
-}
-
-.SlotCategory {
+.ProSlotCat {
     position: absolute;
-    bottom: 4px;
-    left: 6px;
-    font-size: 0.55rem;
+    bottom: 6px;
+    left: 8px;
+    font-size: 9px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #aaa;
-    transition: color 0.2s ease;
+    color: rgba(240, 253, 253, 0.3);
 }
 
-.SlotPrice {
+.ProSlotPrice {
     position: absolute;
-    bottom: 4px;
-    right: 6px;
-    font-size: 0.65rem;
+    bottom: 6px;
+    right: 8px;
+    font-size: 10px;
     font-weight: 700;
-    color: #666;
-    transition: color 0.2s ease;
+    color: var(--text-secondary);
 }
 
-.ParkingSlot.selected-slot .SlotCategory,
-.ParkingSlot.booked-slot .SlotCategory,
-.ParkingSlot.selected-slot .SlotPrice,
-.ParkingSlot.booked-slot .SlotPrice {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.icon {
-    font-size: 1.5rem;
+.ProCarIcon {
+    font-size: 20px;
+    color: #ff4d4d;
     margin-bottom: 2px;
 }
 
-.car-icon {
-    opacity: 1;
+.ProReleaseTimer {
+    position: absolute;
+    top: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #ff4d4d;
+    background-color: rgba(255, 77, 77, 0.05);
+    padding: 1px 4px;
+    border-radius: 3px;
+    max-width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.ParkingRoad {
-    width: 60px;
+/* Operational Roadway Aisles Layout overrides */
+.ProBlueprintAisle {
+    width: 50px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    position: relative;
 }
 
-.RoadLine {
+.AisleDashedLine {
     height: 100%;
-    border-left: 2px dashed #ddd;
+    border-left: 1px dashed rgba(255, 255, 255, 0.08);
 }
 
-.BookingActions {
-    margin-top: 2rem;
+.TerminalActionFooter {
+    margin-top: 2.5rem;
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
-.ConfirmBtn {
-    background-color: var(--primary-color);
-    color: white;
+.ProConfirmCTA {
+    background-color: var(--accent-cyan);
+    color: var(--bg-midnight);
     border: none;
-    padding: 15px 40px;
-    font-size: 1.2rem;
+    padding: 16px 45px;
+    font-size: 15px;
+    font-weight: 700;
     border-radius: 8px;
     cursor: pointer;
-    font-family: var(--Font3, sans-serif);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(137, 92, 245, 0.3);
+    font-family: var(--Font3), sans-serif;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ConfirmBtn:hover:not(:disabled) {
-    background-color: var(--primary-hover);
+.ProConfirmCTA:hover:not(:disabled) {
+    background-color: #ffffff;
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
 }
 
-.ConfirmBtn:disabled {
-    background-color: #cccccc;
-    color: #666666;
+.ProConfirmCTA:disabled {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.2);
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
 }
 
-/* --- Modal Base Styling --- */
-.ModalOverlay {
+/* --- ENTERPRISE SLATE MODAL FRAMEWORKS --- */
+.ProModalOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
+    inset: 0;
+    background: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 10000;
 }
 
-.ModalContent {
-    background: #fff;
-    color: #000;
-    padding: 30px;
-    border-radius: 12px;
+.ProModalCard {
+    background: var(--bg-card);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 35px;
+    border-radius: 16px;
     width: 90%;
-    max-width: 500px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease;
-    max-height: 90vh;
+    max-width: 480px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    max-height: 85vh;
     overflow-y: auto;
+    animation: scaleModal 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.ModalContent h2 {
-    margin-bottom: 5px;
-    color: #333;
-    font-family: var(--Font3, sans-serif);
+@keyframes scaleModal {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-.ModalSubText {
-    color: #666;
-    font-size: 0.9rem;
+.ProModalCard h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.ProModalSubText {
+    color: var(--text-secondary);
+    font-size: 14px;
     margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.BookingForm {
+.ProTerminalForm {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
 }
 
-.FormGroup {
+.ProFormInputGroup {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
 }
 
-.FormRow {
+.ProFormInputRow {
     display: flex;
-    gap: 15px;
+    gap: 16px;
 }
 
-.FormGroup.half {
+.input-half {
     flex: 1;
 }
 
-.FormGroup label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #555;
+.ProFormInputGroup label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.35);
 }
 
-.FormGroup input {
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s;
-}
-
-.FormGroup input:focus {
+.ProFormInputGroup input {
     outline: none;
-    border-color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    transition: all 0.2s ease;
 }
 
-.ErrorText {
-    color: var(--danger-color);
-    font-size: 0.75rem;
-    margin-top: -2px;
+.ProFormInputGroup input:focus {
+    border-color: var(--accent-cyan);
 }
 
-/* --- New Payment Modal Styling --- */
-.PaymentContentBox {
+.ProFieldErrorText {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+/* --- PAYMENT TERMINAL DESIGN SUITES --- */
+.TextAlignCenter {
     text-align: center;
 }
 
-.PaymentContentBox h2 {
-    font-size: 1.8rem;
-}
-
-.PaymentDisplay {
+.ProSecurePaymentDisplay {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f8f9fa;
-    border: 2px dashed var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
 }
 
-.QRBox img {
-    width: 140px;
-    /* Made the QR code larger for the new modal */
-    height: 140px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.ProQRShield img {
+    width: 120px;
+    height: 120px;
+    border-radius: 6px;
+    border: 4px solid #ffffff;
 }
 
-.TotalAmountBox {
+.ProTotalMetricsBox {
     text-align: right;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
-.TotalAmountBox p {
-    margin: 0 0 5px 0;
-    font-size: 0.95rem;
-    color: #666;
-    font-weight: 600;
+.ProTotalMetricsBox p {
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 4px;
 }
 
-.TotalAmountBox .LargePrice {
+.ProCryptoPrice {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--accent-cyan);
     margin: 0;
-    font-size: 3rem;
-    /* Made the total amount very prominent */
-    color: var(--primary-color);
-    font-family: var(--Font3, sans-serif);
-    line-height: 1;
 }
 
-/* All Rights Reserved Text */
-.RightsText {
-    font-size: 0.75rem;
-    color: #999;
-    margin-top: 15px;
-    text-align: center;
-    letter-spacing: 0.5px;
+.ProTerminalRightsText {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
 }
 
-.ModalActions {
+.ProModalActionTriggers {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 12px;
+    margin-top: 10px;
     padding-top: 20px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* Override for Payment modal to center buttons */
-.PaymentContentBox .ModalActions {
+.AlignmentCenter {
     justify-content: center;
 }
 
-.CancelBtn {
-    background: #f4f4f4;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
+.ProModalCancelBtn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    padding: 10px 22px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.2s;
+    font-size: 13.5px;
+    transition: background 0.2s ease;
 }
 
-.CancelBtn:hover {
-    background: #e0e0e0;
+.ProModalCancelBtn:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.PayBtn {
-    background: var(--primary-color);
-    color: #fff;
+.ProModalSubmitBtn {
+    background: var(--accent-cyan);
+    color: var(--bg-midnight);
     border: none;
-    padding: 10px 20px;
+    padding: 10px 24px;
     border-radius: 6px;
     cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 13.5px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.PayBtn:hover {
-    background: var(--primary-hover);
+.ProModalSubmitBtn:hover {
+    background: #ffffff;
+    transform: translateY(-1.5px);
 }
 
-/* --- Success Ticket Modal Styling --- */
-.TicketContent {
-    max-width: 400px;
+/* --- RECEIPT TICKETING CARDS PLATFORMS --- */
+.ProTicketCardBox {
+    max-width: 420px;
     padding: 0;
     overflow: hidden;
-    background: #fdfdfd;
+    background: #0F1422;
 }
 
-.TicketHeader {
-    background: var(--primary-color);
-    color: white;
-    padding: 25px 20px;
+.ProTicketBannerHeader {
+    background: var(--accent-cyan);
+    color: var(--bg-midnight);
+    padding: 24px;
     text-align: center;
 }
 
-.TicketHeader h2 {
-    color: white;
-    margin: 0 0 5px 0;
+.ProTicketBannerHeader h2 {
+    color: var(--bg-midnight);
+    margin-bottom: 4px;
 }
 
-.TicketHeader p {
-    margin: 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
+.ProTicketBannerHeader p {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.8;
 }
 
-.TicketBody {
-    padding: 30px;
+.ProTicketDataBody {
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.TicketQRContainer {
+.ProTicketQRContainer {
     text-align: center;
-    margin-bottom: 25px;
-    padding-bottom: 25px;
-    border-bottom: 2px dashed #ddd;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
     width: 100%;
 }
 
-.TicketQRContainer img {
-    border: 1px solid #eee;
-    padding: 10px;
-    background: white;
+.ProTicketQRContainer img {
+    padding: 8px;
+    background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.TicketQRContainer h3 {
-    margin: 15px 0 0 0;
-    color: var(--accent-black);
-    letter-spacing: 2px;
+.ProTicketQRContainer h3 {
+    margin-top: 12px;
     font-family: monospace;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
+    color: #ffffff;
 }
 
-.TicketDetails {
+.ProTicketDataRows {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.DetailRow {
+.ProTicketRow {
     display: flex;
     justify-content: space-between;
-    font-size: 0.95rem;
-    color: #444;
+    font-size: 14px;
 }
 
-.DetailRow span {
-    color: #888;
+.ProTicketRow span {
+    color: var(--text-secondary);
 }
 
-.DetailRow strong {
-    color: var(--accent-black);
+.ProTicketRow strong {
+    color: #ffffff;
+    font-weight: 600;
 }
 
-.BookedHisPara {
-    margin-top: 7px;
+.MarginTop20 {
+    margin-top: 0;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    width: 100%;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+/* --- RESPONSIVE CONTRACTIONS --- */
+@media (max-width: 1024px) {
+    .ProBookCenterWrapper {
+        padding: 0 2rem;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .TerminalBentoConsole {
+        padding: 1.5rem;
     }
-}
-
-.BezMargin {
-    margin-bottom: 1rem;
-}
-
-/* --- New Release Timer for Booked Slots --- */
-.ReleaseTimer {
-    position: absolute;
-    top: 3px;
-    font-size: 0.55rem;
-    font-weight: 700;
-    text-align: center;
-    color: #fff;
-    line-height: 1.1;
-    background: rgba(252, 255, 103, 0.4);
-    padding: 2px 4px;
-    border-radius: 4px;
-    width: 50%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

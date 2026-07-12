@@ -233,3 +233,26 @@ export const parklyAboutData = {
         btnText: "Book Your Slot Now"
     }
 };
+
+export const parklyBookData = {
+    title: "Terminal Spot Controller",
+    fallbackAddress: "No location state detected",
+    modalDetails: {
+        title: "Vector Allocation Profile",
+        cancelBtn: "Abort",
+        payBtn: "Authorize Gateway"
+    },
+    modalPayment: {
+        title: "Secure Clearing House",
+        subtitle: "Execute cryptographic transaction via core QR terminal matrix.",
+        amountLabel: "Total Authorized Settlement",
+        backBtn: "Return to Profile",
+        confirmBtn: "Confirm Payment Settlement",
+        copyright: "© 2026 Parkly Ltd. Cryptographic Settlement Engine."
+    },
+    modalTicket: {
+        title: "Allocation Validated! 🎉",
+        subtitle: "Deploy token signature at physical terminal barrier gates.",
+        closeBtn: "Terminate Session"
+    }
+};

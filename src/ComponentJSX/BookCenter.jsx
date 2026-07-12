@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../ComponentCSS/BookCenter.css';
-import { ImageCenter } from '../assets/assest'
+import { ImageCenter, parklyBookData } from '../assets/assest';
 
 const BookCenter = () => {
     const location = useLocation();
 
-    // Check router state first, if it's empty, fall back to Local Storage
     const savedDestination = JSON.parse(localStorage.getItem('selectedParkingDestination')) || {};
     const selectedAddress = location.state?.selectedAddress || savedDestination.selectedAddress;
 
     const [activeSection, setActiveSection] = useState("A1");
     const [selectedSlots, setSelectedSlots] = useState([]);
-
-    // --- Real-Time Clock State ---
     const [currentTimeObj, setCurrentTimeObj] = useState(new Date());
 
     useEffect(() => {
@@ -21,13 +18,11 @@ const BookCenter = () => {
         return () => clearInterval(timer);
     }, []);
 
-    // Load History
     const [parkingHistory, setParkingHistory] = useState(() => {
         const savedHistory = localStorage.getItem('parkingHistory');
         return savedHistory ? JSON.parse(savedHistory) : [];
     });
 
-    // --- Modal States ---
     const [showModal, setShowModal] = useState(false);
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [showTicketModal, setShowTicketModal] = useState(false);
@@ -98,7 +93,6 @@ const BookCenter = () => {
         columns.push(slots.slice(i * slotsPerColumn, (i + 1) * slotsPerColumn));
     }
 
-    // --- DYNAMIC LIVE MAP CALCULATION (Auto-Freeing + Text Timers) ---
     const yyyy = currentTimeObj.getFullYear();
     const mm = String(currentTimeObj.getMonth() + 1).padStart(2, '0');
     const dd = String(currentTimeObj.getDate()).padStart(2, '0');
@@ -108,12 +102,10 @@ const BookCenter = () => {
     const activeBookedSlots = [];
     const bookedSlotDetails = {};
 
-    // Loop through history and only keep slots booked for the future or currently active right now
     parkingHistory.forEach(ticket => {
         if (ticket.date > currentDate || (ticket.date === currentDate && ticket.outTime > currentTime)) {
             ticket.slots.forEach(slotId => {
                 activeBookedSlots.push(slotId);
-                // UPDATED: Save BOTH the date and outTime so we can display them together on the UI
                 bookedSlotDetails[slotId] = { date: ticket.date, outTime: ticket.outTime };
             });
         }
@@ -198,7 +190,6 @@ const BookCenter = () => {
         localStorage.setItem('parkingHistory', JSON.stringify(updatedHistory));
         setParkingHistory(updatedHistory);
 
-        // Also update the backup booked slots array in storage
         const existingBooked = JSON.parse(localStorage.getItem('bookedParkingSlots')) || [];
         localStorage.setItem('bookedParkingSlots', JSON.stringify([...new Set([...existingBooked, ...selectedSlots])]));
 
@@ -212,210 +203,211 @@ const BookCenter = () => {
 
     const filledInActiveSection = activeBookedSlots.filter(id => id.startsWith(activeSection)).length;
 
-    // NEW: Helper function to beautifully format the date and time for the small UI box
     const formatReleaseTime = (dateStr, timeStr) => {
         if (!dateStr || !timeStr) return "";
-        // dateStr is "YYYY-MM-DD". We split it to get just the Month and Day.
         const [, month, day] = dateStr.split('-');
         return `${month}/${day} ${timeStr}`;
     };
 
     return (
-        <div className='BookCenter_Section'>
-            <h1 id='Booker_Heading'>Book Your Parking Spot</h1>
-            <p className="SelectedLocText">📍 {selectedAddress || "No location selected"}</p>
+        <div className='ProBookCenterWrapper'>
+            <div className="TerminalHeadlineBlock">
+                <h1>{parklyBookData.title}</h1>
+                <p className="SelectedLocText">📍 {selectedAddress || parklyBookData.fallbackAddress}</p>
+            </div>
 
-            <div className="Slider_Of_ParkingSect">
+            {/* Slider Sectors Mapping Array Layout */}
+            <div className="ProSectorSliderTrack">
                 {sections.map((sec) => (
-                    <div
+                    <button
                         key={sec.id}
-                        className={`BoxAlpha ${activeBookedSlots.filter(id => id.startsWith(sec.id)).length >= sec.total ? 'full' : ''} ${activeSection === sec.id ? 'active' : ''}`}
+                        className={`SectorToggleBox ${activeBookedSlots.filter(id => id.startsWith(sec.id)).length >= sec.total ? 'sector-saturated' : ''} ${activeSection === sec.id ? 'sector-active' : ''}`}
                         onClick={() => !(activeBookedSlots.filter(id => id.startsWith(sec.id)).length >= sec.total) && handleSectionChange(sec.id)}
                     >
-                        {sec.id}
-                    </div>
+                        Sector {sec.id}
+                    </button>
                 ))}
             </div>
 
-            <div className="SectionDetails">
-                <div className="SectionHeader">
-                    <h2>Section {activeSection}</h2>
-                    <p>Available Slots: {totalSlotsForActiveSection - filledInActiveSection} / {totalSlotsForActiveSection}</p>
+            {/* Main Interactive Matrix Dashboard */}
+            <div className="TerminalBentoConsole">
+                <div className="TerminalConsoleHeader">
+                    <h2>Active Sector Console: {activeSection}</h2>
+                    <span>Vacancy Rate: {totalSlotsForActiveSection - filledInActiveSection} / {totalSlotsForActiveSection} Slots Available</span>
                 </div>
 
-                <div className="ParkingMapContainer">
+                <div className="ProParkingGridBlueprint">
                     {columns.map((col, index) => (
                         <React.Fragment key={index}>
-                            <div className="ParkingColumn">
+                            <div className="ProBlueprintColumn">
                                 {col.map((slot) => {
                                     const isBooked = activeBookedSlots.includes(slot.id);
                                     const isSelected = selectedSlots.includes(slot.id);
-                                    const releaseInfo = bookedSlotDetails[slot.id]; // Grab the release info
+                                    const releaseInfo = bookedSlotDetails[slot.id];
 
                                     return (
                                         <div
                                             key={slot.id}
-                                            className={`ParkingSlot ${isBooked ? 'booked-slot' : ''} ${isSelected && !isBooked ? 'selected-slot' : ''}`}
+                                            className={`ProBlueprintSlot ${isBooked ? 'slot-occupied' : ''} ${isSelected && !isBooked ? 'slot-selected' : ''}`}
                                             onClick={() => handleSlotClick(slot.id)}
                                         >
                                             {isBooked ? (
                                                 <>
-                                                    <span className="icon car-icon">🚗</span>
-                                                    <span className="SlotNum">{slot.label}</span>
-                                                    {/* UPDATED: Calling the formatter to show Date AND Time */}
+                                                    <i className='bx bxs-car ProCarIcon'></i>
+                                                    <span className="ProSlotNum">{slot.label}</span>
                                                     {releaseInfo && (
-                                                        <span className="ReleaseTimer">
-                                                            Free: {formatReleaseTime(releaseInfo.date, releaseInfo.outTime)}
+                                                        <span className="ProReleaseTimer">
+                                                            {formatReleaseTime(releaseInfo.date, releaseInfo.outTime)}
                                                         </span>
                                                     )}
                                                 </>
                                             ) : (
                                                 <>
-                                                    <span className="SlotNum">{slot.label}</span>
-                                                    <span className="SlotCategory">{slot.category}</span>
-                                                    <span className="SlotPrice">₹{slot.price}</span>
+                                                    <span className="ProSlotNum">{slot.label}</span>
+                                                    <span className="ProSlotCat">{slot.category}</span>
+                                                    <span className="ProSlotPrice">₹{slot.price}</span>
                                                 </>
                                             )}
                                         </div>
                                     );
                                 })}
                             </div>
-                            {index < 4 && <div className="ParkingRoad"><div className="RoadLine"></div></div>}
+                            {index < 4 && <div className="ProBlueprintAisle"><div className="AisleDashedLine"></div></div>}
                         </React.Fragment>
                     ))}
                 </div>
 
-                <div className="BookingActions">
-                    <button className="ConfirmBtn" disabled={selectedSlots.length === 0} onClick={() => setShowModal(true)}>
-                        {selectedSlots.length > 0 ? `Confirm Booking (${selectedSlots.length}) - ₹${totalPrice}` : 'Select Slots'}
+                <div className="TerminalActionFooter">
+                    <button className="ProConfirmCTA" disabled={selectedSlots.length === 0} onClick={() => setShowModal(true)}>
+                        {selectedSlots.length > 0 ? `Initialize Booking Profile (${selectedSlots.length}) — ₹${totalPrice}` : 'Select Operational Slots'}
                     </button>
                 </div>
             </div>
 
-            {/* --- Modal 1: Detail Section --- */}
+            {/* --- MODAL 1: FORM CONFIGURATION --- */}
             {showModal && (
-                <div className="ModalOverlay">
-                    <div className="ModalContent">
-                        <h2>Detail Section</h2>
-                        <p className="ModalSubText">Selected Slots: {selectedSlots.join(', ')}</p>
+                <div className="ProModalOverlay">
+                    <div className="ProModalCard">
+                        <h2>{parklyBookData.modalDetails.title}</h2>
+                        <p className="ProModalSubText">Operational Vectors: {selectedSlots.join(', ')}</p>
 
-                        <form onSubmit={handleProceedToPayment} className="BookingForm">
-                            <div className="FormGroup">
-                                <label>1. Owner Name</label>
-                                <input type="text" name="name" value={formData.name} placeholder='Your Name' onChange={handleInputChange} />
-                                {formErrors.name && <span className="ErrorText">{formErrors.name}</span>}
+                        <form onSubmit={handleProceedToPayment} className="ProTerminalForm">
+                            <div className="ProFormInputGroup">
+                                <label>1. Authorized Operator Name</label>
+                                <input type="text" name="name" value={formData.name} placeholder='Operator Identity' onChange={handleInputChange} />
+                                {formErrors.name && <span className="ProFieldErrorText">{formErrors.name}</span>}
                             </div>
-                            <div className="FormGroup">
-                                <label>2. Owner Number</label>
-                                <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="10 digits" />
-                                {formErrors.phone && <span className="ErrorText">{formErrors.phone}</span>}
+                            <div className="ProFormInputGroup">
+                                <label>2. Communications Number</label>
+                                <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="10 Digits Vector" />
+                                {formErrors.phone && <span className="ProFieldErrorText">{formErrors.phone}</span>}
                             </div>
-                            <div className="FormGroup">
-                                <label>3. Car Model</label>
-                                <input type="text" name="carModel" value={formData.carModel} placeholder='ex:- Bolero Neo' onChange={handleInputChange} />
-                                {formErrors.carModel && <span className="ErrorText">{formErrors.carModel}</span>}
+                            <div className="ProFormInputGroup">
+                                <label>3. Vehicle Registry Model</label>
+                                <input type="text" name="carModel" value={formData.carModel} placeholder='e.g., Bolero Neo' onChange={handleInputChange} />
+                                {formErrors.carModel && <span className="ProFieldErrorText">{formErrors.carModel}</span>}
                             </div>
-                            <div className="FormGroup">
-                                <label>4. Number Plate</label>
-                                <input type="text" name="plateNumber" value={formData.plateNumber} onChange={handleInputChange} placeholder="MH 12 AB 1234" />
-                                {formErrors.plateNumber && <span className="ErrorText">{formErrors.plateNumber}</span>}
+                            <div className="ProFormInputGroup">
+                                <label>4. License Plate Matrix</label>
+                                <input type="text" name="plateNumber" value={formData.plateNumber} onChange={handleInputChange} placeholder="DL 01 AB 1234" />
+                                {formErrors.plateNumber && <span className="ProFieldErrorText">{formErrors.plateNumber}</span>}
                             </div>
-                            <div className="FormRow">
-                                <div className="FormGroup half">
-                                    <label>5. Date</label>
+                            <div className="ProFormInputRow">
+                                <div className="ProFormInputGroup input-half">
+                                    <label>5. Allocation Date</label>
                                     <input type="date" name="bookingDate" value={formData.bookingDate} onChange={handleInputChange} min={minDate} max={maxDate} />
-                                    {formErrors.bookingDate && <span className="ErrorText">{formErrors.bookingDate}</span>}
+                                    {formErrors.bookingDate && <span className="ProFieldErrorText">{formErrors.bookingDate}</span>}
                                 </div>
                             </div>
-                            <div className="FormRow">
-                                <div className="FormGroup half">
-                                    <label>6a. In-Time</label>
+                            <div className="ProFormInputRow">
+                                <div className="ProFormInputGroup input-half">
+                                    <label>6a. Ingress Vector Time</label>
                                     <input type="time" name="inTime" value={formData.inTime} onChange={handleInputChange} />
-                                    {formErrors.inTime && <span className="ErrorText">{formErrors.inTime}</span>}
+                                    {formErrors.inTime && <span className="ProFieldErrorText">{formErrors.inTime}</span>}
                                 </div>
-                                <div className="FormGroup half">
-                                    <label>6b. Out-Time</label>
+                                <div className="ProFormInputGroup input-half">
+                                    <label>6b. Egress Vector Time</label>
                                     <input type="time" name="outTime" value={formData.outTime} onChange={handleInputChange} />
-                                    {formErrors.outTime && <span className="ErrorText">{formErrors.outTime}</span>}
+                                    {formErrors.outTime && <span className="ProFieldErrorText">{formErrors.outTime}</span>}
                                 </div>
                             </div>
 
-                            <div className="ModalActions">
-                                <button type="button" className="CancelBtn" onClick={() => setShowModal(false)}>Cancel</button>
-                                <button type="submit" className="PayBtn">Proceed to Payment</button>
+                            <div className="ProModalActionTriggers">
+                                <button type="button" className="ProModalCancelBtn" onClick={() => setShowModal(false)}>{parklyBookData.modalDetails.cancelBtn}</button>
+                                <button type="submit" className="ProModalSubmitBtn">{parklyBookData.modalDetails.payBtn}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             )}
 
-            {/* --- Modal 1.5: Payment Section --- */}
+            {/* --- MODAL 1.5: SECURE PAYMENT TERMINAL --- */}
             {showPaymentModal && (
-                <div className="ModalOverlay">
-                    <div className="ModalContent PaymentContentBox">
-                        <h2>Payment Section</h2>
-                        <p className="ModalSubText">Scan the QR code to complete your booking.</p>
+                <div className="ProModalOverlay">
+                    <div className="ProModalCard TextAlignCenter">
+                        <h2>{parklyBookData.modalPayment.title}</h2>
+                        <p className="ProModalSubText">{parklyBookData.modalPayment.subtitle}</p>
 
-                        <div className="PaymentDisplay">
-                            <div className="QRBox">
-                                <img src={ImageCenter.MyQRCode} alt="Payment QR" />
+                        <div className="ProSecurePaymentDisplay">
+                            <div className="ProQRShield">
+                                <img src={ImageCenter.MyQRCode} alt="Clearing QR Token" />
                             </div>
-                            <div className="TotalAmountBox">
-                                <p>Total Amount to Pay</p>
-                                <h3 className="LargePrice">₹{totalPrice}</h3>
+                            <div className="ProTotalMetricsBox">
+                                <p>{parklyBookData.modalPayment.amountLabel}</p>
+                                <h3 className="ProCryptoPrice">₹{totalPrice}</h3>
                             </div>
                         </div>
 
-                        <div className="ModalActions">
+                        <div className="ProModalActionTriggers AlignmentCenter">
                             <button
                                 type="button"
-                                className="CancelBtn"
+                                className="ProModalCancelBtn"
                                 onClick={() => {
                                     setShowPaymentModal(false);
                                     setShowModal(true);
                                 }}
                             >
-                                Back
+                                {parklyBookData.modalPayment.backBtn}
                             </button>
-                            <button type="button" className="PayBtn" onClick={handleFinalBooking}>
-                                I have Paid & Book
+                            <button type="button" className="ProModalSubmitBtn" onClick={handleFinalBooking}>
+                                {parklyBookData.modalPayment.confirmBtn}
                             </button>
                         </div>
 
-                        <p className="RightsText">© 2026 All rights reserved for Parkly.</p>
+                        <p className="ProTerminalRightsText">{parklyBookData.modalPayment.copyright}</p>
                     </div>
                 </div>
             )}
 
-            {/* --- Modal 2: Success Ticket & Generated QR --- */}
+            {/* --- MODAL 2: SUCCESS RECEIPT TOKEN --- */}
             {showTicketModal && currentTicket && (
-                <div className="ModalOverlay">
-                    <div className="ModalContent TicketContent">
-                        <div className="TicketHeader">
-                            <h2>Booking Successful! 🎉</h2>
-                            <p>Please present this QR code at the entry gate.</p>
+                <div className="ProModalOverlay">
+                    <div className="ProModalCard ProTicketCardBox">
+                        <div className="ProTicketBannerHeader">
+                            <h2>{parklyBookData.modalTicket.title}</h2>
+                            <p>{parklyBookData.modalTicket.subtitle}</p>
                         </div>
 
-                        <div className="TicketBody">
-                            <div className="TicketQRContainer">
+                        <div className="ProTicketDataBody">
+                            <div className="ProTicketQRContainer">
                                 <img
-                                    src={"https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=" + encodeURIComponent(window.location.origin + "/bookedhistory?ticket=" + currentTicket.bookingId)}
-                                    alt="Access QR Code"
+                                    src={"https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=8&data=" + encodeURIComponent(window.location.origin + "/bookedhistory?ticket=" + currentTicket.bookingId)}
+                                    alt="Validated Pass QR"
                                 />
                                 <h3>{currentTicket.bookingId}</h3>
                             </div>
 
-                            <div className="TicketDetails">
-                                <div className="DetailRow"><span>Name:</span> <strong>{currentTicket.name}</strong></div>
-                                <div className="DetailRow"><span>Date:</span> <strong>{currentTicket.date}</strong></div>
-                                <div className="DetailRow"><span>Time:</span> <strong>{currentTicket.inTime} to {currentTicket.outTime}</strong></div>
-                                <div className="DetailRow"><span>Slots:</span> <strong>{currentTicket.slots.join(', ')}</strong></div>
-                                <div className="DetailRow"><span>Vehicle:</span> <strong>{currentTicket.plateNumber}</strong></div>
+                            <div className="ProTicketDataRows">
+                                <div className="ProTicketRow"><span>Identity:</span> <strong>{currentTicket.name}</strong></div>
+                                <div className="ProTicketRow"><span>Schedule:</span> <strong>{currentTicket.date}</strong></div>
+                                <div className="ProTicketRow"><span>Duration:</span> <strong>{currentTicket.inTime} to {currentTicket.outTime}</strong></div>
+                                <div className="ProTicketRow"><span>Allocations:</span> <strong>{currentTicket.slots.join(', ')}</strong></div>
+                                <div className="ProTicketRow"><span>Vehicle ID:</span> <strong>{currentTicket.plateNumber}</strong></div>
                             </div>
                         </div>
 
-                        <div className="ModalActions" style={{ justifyContent: 'center', marginTop: '20px' }}>
-                            <button className="PayBtn BezMargin" onClick={() => setShowTicketModal(false)}>Close Ticket</button>
+                        <div className="ProModalActionTriggers AlignmentCenter MarginTop20">
+                            <button className="ProModalSubmitBtn" onClick={() => setShowTicketModal(false)}>{parklyBookData.modalTicket.closeBtn}</button>
                         </div>
                     </div>
                 </div>
