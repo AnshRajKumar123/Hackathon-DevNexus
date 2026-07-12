@@ -1,22 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--Font1);
-  user-select: none;
-  text-decoration: none;
-  color: inherit;
-}
-
-body {
-  background: linear-gradient(to right, #0F0725, #0B0A22);
-  color: #F0FDFD;
-}
 
 :root {
   --Font1: "Quicksand", sans-serif;
@@ -24,6 +9,59 @@ body {
   --Font3: "Libertinus Sans", sans-serif;
   --Font4: "Playwrite HU", cursive;
 
-  --TacentColor1: #0000001a;
-  --TacentColor2: #ffffff0f;
+  --bg-midnight: #0B0F19;
+  --bg-card: #151D30;
+  --accent-cyan: #00F2FE;
+  --text-primary: #F0FDFD;
+  --text-secondary: rgba(240, 253, 253, 0.65);
+
+  --TacentColor1: rgba(0, 0, 0, 0.1);
+  --TacentColor2: rgba(255, 255, 255, 0.06);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--Font1), sans-serif;
+  user-select: none;
+  text-decoration: none;
+  color: inherit;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-midnight);
+  color: var(--text-primary);
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-midnight);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-midnight);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  border: 2px solid var(--bg-midnight);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
 }

@@ -1,80 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import '../ComponentCSS/Navbar.css';
-import { ImageCenter } from '../assets/assest';
+import { ImageCenter, parklyNavbarData } from '../assets/assest';
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
-    // State to manage navbar visibility
     const [showNav, setShowNav] = useState(true);
-    // State to track the last scroll position
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [isScrolled, setIsScrolled] = useState(false); // Tracks background density updates
 
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
-            // If we are at the very top of the page, always show it
+            // Background density activation shift
+            if (currentScrollY > 20) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+
+            // Scroll direction management logic
             if (currentScrollY < 50) {
                 setShowNav(true);
-            }
-            // If scrolling down, hide the navbar
-            else if (currentScrollY > lastScrollY) {
+            } else if (currentScrollY > lastScrollY) {
                 setShowNav(false);
-            }
-            // If scrolling up, show the navbar
-            else {
+            } else {
                 setShowNav(true);
             }
 
-            // Update the last scroll position to the current one
             setLastScrollY(currentScrollY);
         };
 
-        // Add the scroll event listener
         window.addEventListener('scroll', handleScroll);
-
-        // Cleanup listener on unmount
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [lastScrollY]); // Re-run effect when lastScrollY changes
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY]);
 
     return (
-        // Dynamically apply a class based on the showNav state
-        <nav className={showNav ? 'nav-visible' : 'nav-hidden'}>
+        <nav className={`ParklyNavContainer ${showNav ? 'nav-visible' : 'nav-hidden'} ${isScrolled ? 'nav-scrolled' : ''}`}>
+
+            {/* Logo Hub */}
             <div className="FirstSide">
                 <Link to='/' className='WebsiteLogo'>
                     <img src={ImageCenter.WebLogo} alt="Parkly Logo" />
                 </Link>
             </div>
+
+            {/* Menu Links Layer */}
             <div className="SecondSide">
                 <ul>
-                    <NavLink to='/' className='SameKamKeLiye'>
-                        Home
-                    </NavLink>
+                    {parklyNavbarData.links.map((item, idx) => (
+                        <NavLink key={idx} to={item.path} className='SameKamKeLiye'>
+                            {item.label}
+                        </NavLink>
+                    ))}
 
-                    <NavLink to='/about' className='SameKamKeLiye'>
-                        About Us
-                    </NavLink>
-
-                    <NavLink to='/bookedhistory' className='SameKamKeLiye'>
-                        Booked History
-                    </NavLink>
-
+                    {/* Integrated Dropdown Menu Deck */}
                     <div className="DropDownBox">
                         <button className='SameKamKeLiye ForIcons'>
-                            More <i className='bx bxs-down-arrow'></i>
+                            {parklyNavbarData.dropdown.triggerLabel} <i className='bx bx-chevron-down'></i>
                         </button>
                         <div className="ForSpaceBox">
                             <div className="DropListBox">
-                                <span>Notification</span>
-                                <Link to='/reportfraud'>Report A Fraud</Link>
-                                <Link to='/helpsupport'>Help And Support</Link>
+                                {parklyNavbarData.dropdown.items.map((dropItem, dIdx) => (
+                                    dropItem.isSpan ? (
+                                        <span key={dIdx}>{dropItem.label}</span>
+                                    ) : (
+                                        <Link key={dIdx} to={dropItem.path}>{dropItem.label}</Link>
+                                    )
+                                ))}
                             </div>
                         </div>
                     </div>
 
+                    {/* Clerk Identity Systems Anchor */}
                     <div className="AuthWrapper">
                         <SignedOut>
                             <SignInButton mode="modal">
@@ -87,10 +86,10 @@ const Navbar = () => {
                                 appearance={{
                                     elements: {
                                         userButtonAvatarBox: {
-                                            width: "40px",
-                                            height: "40px",
-                                            border: "2px solid #895CF5",
-                                            transition: "0.3s",
+                                            width: "38px",
+                                            height: "38px",
+                                            border: "2px solid #00F2FE",
+                                            transition: "0.3s ease",
                                         }
                                     }
                                 }}

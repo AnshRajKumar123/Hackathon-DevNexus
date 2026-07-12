@@ -35,7 +35,7 @@ export const ImageCenter = {
     IOS,
     MyQRCode,
     GooglePlay,
-    
+
     OurJourneyImage,
     MapIcon,
     Customer_Service,
@@ -43,3 +43,21 @@ export const ImageCenter = {
     BMW_Key,
     Hand_Mobile
 }
+
+
+// 🌟 Add this at the bottom of your assets file
+export const parklyNavbarData = {
+    links: [
+        { label: "Home", path: "/", isDropdown: false },
+        { label: "About Us", path: "/about", isDropdown: false },
+        { label: "Booked History", path: "/bookedhistory", isDropdown: false }
+    ],
+    dropdown: {
+        triggerLabel: "More",
+        items: [
+            { label: "Notification", path: "/notifications", isSpan: true }, // custom configuration tag
+            { label: "Report A Fraud", path: "/reportfraud", isSpan: false },
+            { label: "Help And Support", path: "/helpsupport", isSpan: false }
+        ]
+    }
+};

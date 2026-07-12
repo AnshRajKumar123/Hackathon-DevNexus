@@ -1,194 +1,247 @@
-/* --- MAIN NAVBAR CONTAINER --- */
-nav {
+/* ==========================================================================
+   🌟 PARKLY MIDNIGHT NEO-GLASS NAVBAR STYLE SHEET
+   ========================================================================== */
+
+/* --- MAIN CONTAINER MATRIX --- */
+.ParklyNavContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 3rem;
     padding: 0 5rem;
-    height: 100px;
+    height: 80px;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: transparent;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    mix-blend-mode: difference;
-    transition: transform 0.3s ease-in-out;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    box-sizing: border-box;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.3s ease,
+        backdrop-filter 0.3s ease,
+        height 0.3s ease;
 }
 
-/* --- DYNAMIC SCROLL CLASSES --- */
+/* --- DYNAMIC SCROLL STATES --- */
+.nav-scrolled {
+    background-color: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+    height: 74px;
+}
+
 .nav-visible {
     transform: translateY(0);
-    /* Normal position */
 }
 
 .nav-hidden {
     transform: translateY(-100%);
-    /* Slides the navbar up and out of view */
 }
 
-/* --- WEBSITE LOGO --- */
+/* --- BRAND LOGO MATRIX --- */
 .WebsiteLogo img {
-    height: 50px;
-    filter: saturate(0) brightness(5);
+    height: 40px;
+    object-fit: contain;
     cursor: pointer;
-    transition: 0.3s ease;
+    filter: saturate(0) brightness(5);
+    transition: all 0.3s ease;
 }
 
 .WebsiteLogo:hover img {
-    filter: invert(41%) sepia(82%) saturate(2250%) hue-rotate(238deg) brightness(99%) contrast(93%);
+    transform: scale(1.02);
+    filter: invert(72%) sepia(91%) saturate(3821%) hue-rotate(143deg) brightness(102%) contrast(105%);
 }
 
-/* --- RIGHT SIDE NAVIGATION LIST --- */
+/* --- RIGHT MENU TRACK ALIGNMENT --- */
 .SecondSide ul {
     display: flex;
     align-items: center;
-    gap: 4.5rem;
+    gap: 3.5rem;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.SecondSide ul button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    position: relative;
-}
-
-/* --- NAVIGATION LINKS --- */
+/* --- UNIVERSAL LINK STRUCTURE --- */
 .SameKamKeLiye {
     text-decoration: none;
     background-color: transparent;
     border: none;
     cursor: pointer;
     position: relative;
-    color: #ffffff;
-    font-size: 18px;
+    color: rgba(240, 253, 253, 0.65);
+    /* Muted Ice White text */
+    font-size: 15px;
     font-family: var(--Font3, sans-serif);
     font-weight: 600;
-    transition: 0.25s ease-in-out;
+    transition: color 0.25s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    padding: 8px 0;
 }
 
-/* Underline Animation */
+/* Electric Cyan Hover/Active Underline Glow Token */
 .SameKamKeLiye::before {
     position: absolute;
     content: '';
-    bottom: -1px;
-    left: -3px;
-    height: 2px;
-    width: 0%;
-    background-color: #895CF5;
-    border-radius: 50px;
-    transition: 0.25s ease-in-out;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 0;
+    background-color: #00F2FE;
+    /* Neon Cyan */
+    border-radius: 4px;
+    box-shadow: 0 0 10px #00F2FE;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover & Active States for Underline */
-.SameKamKeLiye:hover::before,
-.SameKamKeLiye.active::before,
-.DropDownBox:hover .SameKamKeLiye::before {
-    width: 110%;
-}
-
-/* Hover & Active States for Text Color */
+/* Combined Hover & Focus Triggers */
 .SameKamKeLiye:hover,
 .SameKamKeLiye.active,
 .DropDownBox:hover .SameKamKeLiye {
-    color: #895CF5;
+    color: #ffffff;
 }
 
+.SameKamKeLiye.active::before,
+.SameKamKeLiye:hover::before {
+    width: 100%;
+}
+
+/* Dropdown Arrow Rotation Controls */
 .ForIcons i {
-    font-size: 12px;
+    font-size: 14px;
+    transition: transform 0.3s ease;
 }
 
-/* --- DROPDOWN MENU --- */
+.DropDownBox:hover .ForIcons i {
+    transform: rotate(180deg);
+    color: #00F2FE;
+}
+
+/* --- TECH DROPDOWN CONSOLE --- */
 .DropDownBox {
     position: relative;
-    display: inline-block;
 }
 
 .ForSpaceBox {
     display: none;
     position: absolute;
-    right: 0;
-    padding-top: 15px;
-    transition: 0.4s ease-in-out;
+    right: -20px;
+    top: 100%;
+    padding-top: 12px;
+    animation: dropReveal 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes dropReveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .DropListBox {
-    width: 200px;
-    border-radius: 10px;
-    padding: 10px;
+    width: 220px;
+    border-radius: 14px;
+    padding: 8px;
     display: flex;
-    align-items: start;
     flex-direction: column;
-    background-color: #5b19f4;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background-color: #151D30;
+    /* Secondary Cyber Panel Slate */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .DropListBox span,
 .DropListBox a {
-    padding: 10px 12px;
+    padding: 10px 14px;
     cursor: pointer;
     width: 100%;
+    box-sizing: border-box;
     border-radius: 8px;
-    transition: 0.3s ease-in-out;
-    color: #fff;
+    transition: all 0.2s ease;
+    color: rgba(240, 253, 253, 0.7);
     text-decoration: none;
     font-family: var(--Font3, sans-serif);
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
 }
 
-.DropListBox span:hover,
+/* Notification Header Span Override */
+.DropListBox span {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    color: rgba(240, 253, 253, 0.35);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: default;
+}
+
 .DropListBox a:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 242, 254, 0.08);
+    color: #00F2FE;
+    transform: translateX(3px);
 }
 
 .DropDownBox:hover .ForSpaceBox {
     display: block;
 }
 
-/* --- CLERK AUTHENTICATION WRAPPER --- */
+/* --- CLERK AUTH TOKENS SHIFT --- */
 .AuthWrapper {
     display: flex;
     align-items: center;
-    margin-left: -1rem;
 }
 
-/* Custom Styled Login Button matching your theme */
 .ClerkLoginBtn {
-    background-color: #895CF5 !important;
-    color: white !important;
-    padding: 10px 24px;
+    background: #00F2FE !important;
+    color: #0B0F19 !important;
+    /* Matte dark deep text contrast */
+    padding: 9px 22px;
     border: none;
     border-radius: 8px;
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 14.5px;
     font-family: var(--Font3, sans-serif);
     cursor: pointer;
-    transition: 0.3s ease-in-out;
-    box-shadow: 0 4px 15px rgba(137, 92, 245, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ClerkLoginBtn:hover {
-    background-color: #7042e0 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(137, 92, 245, 0.4);
+    background: #ffffff !important;
+    box-shadow: 0 6px 22px rgba(255, 255, 255, 0.25);
+    transform: translateY(-1.5px);
 }
 
-/* Sizing the Clerk User Avatar */
-.UserAvatarSize {
-    width: 45px !important;
-    height: 45px !important;
-    border: 2px solid #895CF5;
-    transition: 0.3s ease-in-out;
-    border-radius: 50%;
+/* --- RESPONSIVE MEDIA ENGINES --- */
+@media (max-width: 1024px) {
+    .ParklyNavContainer {
+        padding: 0 2rem;
+    }
+
+    .SecondSide ul {
+        gap: 2rem;
+    }
 }
 
-.UserAvatarSize:hover {
-    transform: scale(1.1);
+@media (max-width: 768px) {
+    .ParklyNavContainer {
+        height: 70px;
+    }
+
+    /* Dynamic layout safety check—protects spacing parameters */
+    .SecondSide ul .SameKamKeLiye:not(.ForIcons) {
+        display: none;
+    }
 }
