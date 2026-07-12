@@ -44,8 +44,6 @@ export const ImageCenter = {
     Hand_Mobile
 }
 
-
-// 🌟 Add this at the bottom of your assets file
 export const parklyNavbarData = {
     links: [
         { label: "Home", path: "/", isDropdown: false },
@@ -62,7 +60,6 @@ export const parklyNavbarData = {
     }
 };
 
-// 🌟 Add this at the bottom of your assets file
 export const parklyHeroData = {
     titlePrefix: "Best Space Car",
     titleSuffix: "Parking Area",
@@ -82,4 +79,28 @@ export const parklyHeroData = {
         cancel: "Cancel",
         action: "Go to Login"
     }
+};
+
+export const parklyFeaturesData = {
+    header: {
+        tagline: "Core Capabilities",
+        title: "Engineered for Seamless Mobility"
+    },
+    items: [
+        {
+            icon: "bx bx-credit-card-front",
+            title: "Save Money",
+            description: "Find the most competitive rates in the city. Compare prices instantly and enjoy exclusive discounts when you book in advance."
+        },
+        {
+            icon: "bx bx-time-five",
+            title: "Save Time",
+            description: "Stop circling the block. Pinpoint your perfect spot in seconds and navigate directly to your reserved space without any delays."
+        },
+        {
+            icon: "bx bx-shield-quarter",
+            title: "Save Stress",
+            description: "Experience total peace of mind. Secure your parking before you leave home and arrive knowing a spot is waiting for you."
+        }
+    ]
 };
