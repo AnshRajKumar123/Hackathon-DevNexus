@@ -61,3 +61,25 @@ export const parklyNavbarData = {
         ]
     }
 };
+
+// 🌟 Add this at the bottom of your assets file
+export const parklyHeroData = {
+    titlePrefix: "Best Space Car",
+    titleSuffix: "Parking Area",
+    description: "Your journey doesn't end when you arrive; it ends when you're parked. We make sure that transition is flawless.",
+    placeholders: {
+        location: "1. Set your current location...",
+        parking: "2. Select a parking area from the map below..."
+    },
+    buttons: {
+        detect: "Current Location",
+        detecting: "Detecting...",
+        cta: "Grab A Spot"
+    },
+    modal: {
+        title: "Login Required",
+        description: "You must be logged in to book a parking spot. Please log in or create an account to continue.",
+        cancel: "Cancel",
+        action: "Go to Login"
+    }
+};
