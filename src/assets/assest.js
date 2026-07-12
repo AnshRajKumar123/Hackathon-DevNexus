@@ -190,3 +190,46 @@ export const parklyFooterData = {
     },
     disclaimer: "By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners 2008-2026 © Parkly Ltd. All rights reserved."
 };
+
+
+export const parklyAboutData = {
+    banner: {
+        title: "Innovating the Way You Park",
+        description: "Discover the passion and technology behind our mission to eliminate parking stress. What started as a simple idea to solve city congestion has evolved into a seamless digital platform."
+    },
+    journey: {
+        tagline: "The Core History",
+        title: "Our Journey",
+        p1: "The foundation of Parkly emerged from a real-life frustration shared by a close friend, Ranjit Maurya. While heading to a crucial career interview, Ranjit found himself trapped in a nightmare: despite arriving in the area on time, he spent over thirty minutes circling for parking. By the time he found a spot, he was significantly late for his interview. Seeing a friend suffer such a high-stakes setback due to a simple parking issue sparked a mission: no one should ever miss an opportunity because of a parking spot.",
+        p2: "While other platforms exist, we noticed they lacked the speed and precision required for the modern driver. This drove our team to build something better. We integrated a live-map interface with real-time GPS tracking to ensure users aren't just finding a general area, but a specific, available slot.",
+        p3: "To streamline the experience, we pioneered a seamless QR-code entry system. Upon booking, users receive an instant digital pass; a simple scan at the facility allows them to park and go without touching a ticket or waiting in a queue. Combined with our 24/7 dedicated customer support, Parkly isn't just a booking site—it's a commitment to ensuring that your journey ends exactly when you arrive."
+    },
+    mission: {
+        tagline: "What we believe in",
+        title: "Our Mission & Values",
+        description: "Our company exists to eliminate the stress of urban travel by providing seamless, reliable parking solutions for every driver. At Parkly, we believe that smart technology should simplify life, starting with the moment you arrive. Our values guide every decision we make, from real-time data accuracy to ensuring a secure and effortless experience at every location.",
+        cards: [
+            {
+                title: "Accuracy & Reliability",
+                text: "WE LEVERAGE LIVE DATA AND GPS TRACKING TO ENSURE EVERY SLOT LISTED IS AVAILABLE IN REAL-TIME. YOUR TIME IS VALUABLE, AND OUR MISSION IS TO ENSURE YOU NEVER HAVE TO CIRCLE THE BLOCK AGAIN."
+            },
+            {
+                title: "Seamless Innovation",
+                text: "WE ARE COMMITTED TO A TICKETLESS, HASSLE-FREE FUTURE. BY INTEGRATING INSTANT QR-CODE ACCESS AND SECURE DIGITAL PAYMENTS, WE REDUCE CONGESTION AND MAKE URBAN MOBILITY FASTER AND SMARTER FOR EVERYONE."
+            },
+            {
+                title: "24/7 Customer Service",
+                text: "WE BELIEVE IN BEING THERE WHEN YOU NEED US MOST. WHETHER IT'S MIDNIGHT OR RUSH HOUR, OUR DEDICATED SUPPORT TEAM IS AVAILABLE AROUND THE CLOCK TO ENSURE YOUR PARKING EXPERIENCE IS FLAWLESS."
+            }
+        ]
+    },
+    team: {
+        title: "The Architects Behind Mobility",
+        description: "Our team is a passionate group of developers, problem-solvers, and innovators dedicated to making your urban commute stress-free."
+    },
+    cta: {
+        title: "Ready to Park Without the Stress?",
+        description: "Join the Parkly community today and experience the fastest way to secure your slot. Stop wasting time in traffic and start arriving with confidence using our live-map and instant QR-entry system.",
+        btnText: "Book Your Slot Now"
+    }
+};
